@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Container, Row, Col, Stack, Image, Nav } from "react-bootstrap";
 
 const Footer = ({ imgUrl, megaMenuItems }) => {
-  
   // const MenuItems = ({ items }) => {
   //   return items.map((item) => (
   //     <Nav.Link
@@ -70,13 +69,16 @@ const Footer = ({ imgUrl, megaMenuItems }) => {
                   </Nav>
                 </Col>
               ))}
-
             </Row>
           </Col>
         </Row>
         {/* // to Insert Special Entities in React must use Hex code of utf-16 in fromCodePoint method of js String // */}
         <p className="text-center small ">
-          copyright<span className="fw-bold text-danger"> {String.fromCharCode(0x00A9)} </span>{" "}
+          copyright
+          <span className="fw-bold text-danger">
+            {" "}
+            {String.fromCharCode(0x00a9)}{" "}
+          </span>{" "}
           <small>AnimalZ Design and Development team.</small>
         </p>
       </Container>
