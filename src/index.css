@@ -11,3 +11,67 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 } */
+
+:root {
+    --bs-dark: #004225;
+    --bs-light: #F5F5DC;
+    --bs-secondary: #FFCF9D;
+    --bs-warning: #EE9322;
+    /* --bs-warning: #E97224; */
+
+
+    --bs-dark-rgb: 0, 66, 37;
+    --bs-light-rgb: 245, 245, 220;
+    --bs-secondary-rgb: 255, 207, 157;
+    --bs-warning-rgb: 238, 147, 34;
+    /* --bs-warning-rgb:233, 114, 36; */
+
+    --bs-btn-color: #fff;
+
+    --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 1.5;
+    --bs-body-color: #212529;
+}
+
+.btn-warning {
+    background-color: #EE9322 !important;
+    border-color: #EE9322 !important;
+    color: #004225;
+}
+
+.btn-warning:hover {
+    background-color: #FFB26B !important;
+    color: #198754;
+}
+
+.btn-dark {
+    background-color: #004225 !important;
+    border-color: #004225 !important;
+    color: #FFCF9D !important;
+}
+
+.btn-dark:hover {
+    background-color: #198754 !important;
+    border-color: #219C90 !important;
+}
+
+.btn-secondary {
+    background-color: #FFCF9D !important;
+    border-color: #FFCF9D !important;
+    color: #198754;
+
+}
+
+.btn-secondary:hover {
+    background-color: #FFB000 !important;
+}
+
+.form-control:focus {
+    background-color: #B0D9B1 !important;
+    border-color: #79AC78 !important;
+}
