@@ -7,9 +7,9 @@ const SectionsCard = ({ title, description, linkTo }) => {
       <CardBody className="d-flex flex-column">
         <CardTitle className="text-warning">{title}</CardTitle>
         <CardText className="text-secondary"> {description} </CardText>
-        <Button variant="warning" className="mt-auto px-4">
-          <Link to={linkTo}></Link> Go To Page
-        </Button>
+        <Link to={linkTo} className="mt-auto px-4 btn btn-warning">
+          Go To Page
+        </Link>
       </CardBody>
     </Card>
   );

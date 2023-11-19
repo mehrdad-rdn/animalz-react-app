@@ -108,7 +108,7 @@ function Home() {
       </section>
       <section id="homeCards" className="bg-light my-3 ">
         <Container fluid="md">
-          <Row xs={1} md={2} lg={3} className="justify-content-cener g-2">
+          <Row xs={1} md={2} lg={3} className="justify-content-center g-2">
             {sectionsCardData.map((data, index) => (
               <Col key={index}>
                 <SectionsCard

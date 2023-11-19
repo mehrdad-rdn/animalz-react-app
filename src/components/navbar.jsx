@@ -23,16 +23,28 @@ const NavigationBar = ({ brand, imgUrl }) => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-menu" />
           <Navbar.Collapse id="navbar-menu">
-            <Nav className="ms-auto">
+            <Nav className="ms-auto align-items-center">
               <NavDropdown title="AnimalZ" id="navbar-menu-dropdown">
-                <NavDropdown.Item href="#">A-Z ltis</NavDropdown.Item>
+                <Link to="/" className="dropdown-item">
+                  A-Z ltis
+                </Link>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#">Dogs</NavDropdown.Item>
-                <NavDropdown.Item href="#">cats</NavDropdown.Item>
-                <NavDropdown.Item href="#">Birds</NavDropdown.Item>
+                <Link to="/" className="dropdown-item">
+                  Dogs
+                </Link>
+                <Link to="/" className="dropdown-item">
+                  cats
+                </Link>
+                <Link to="/" className="dropdown-item">
+                  Birds
+                </Link>
               </NavDropdown>
-              <Nav.Link href="#articles">Last Articles</Nav.Link>
-              <Nav.Link href="#about">Abute Us</Nav.Link>
+              <Link to="/" className="nav-link">
+                Last Articles
+              </Link>
+              <Link to="/" className="nav-link">
+                Abute Us
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

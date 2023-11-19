@@ -19,7 +19,7 @@ const ImageVerticalCard = ({ imgUrl, header, title, abstract, linkTo }) => {
           <img
             src={imgUrl}
             alt={header}
-            className="img-fluid object-fit-cover h-100 rounded-start"
+            className="img-fluid object-fit-cover h-100 "
           />
         </Col>
         <Col md={8}>
@@ -31,14 +31,12 @@ const ImageVerticalCard = ({ imgUrl, header, title, abstract, linkTo }) => {
             <CardText>
               {abstract}
               <br />
-              <CardLink className="text-decoration-none">
-                <Link
-                  to={linkTo}
-                  className=" text-success text-decoration-none"
-                >
-                  Read More ...
-                </Link>
-              </CardLink>
+              <Link
+                to={linkTo}
+                className=" text-success text-decoration-none card-link"
+              >
+                Read More ...
+              </Link>
             </CardText>
           </CardBody>
         </Col>

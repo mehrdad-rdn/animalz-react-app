@@ -1,6 +1,7 @@
 // import React, { ReactPropTypes } from "react";
 import PropTypes from "prop-types";
 import { Container, Row, Col, Stack, Image, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Footer = ({ imgUrl, megaMenuItems }) => {
   // const MenuItems = ({ items }) => {
@@ -32,19 +33,19 @@ const Footer = ({ imgUrl, megaMenuItems }) => {
     <div className="bg-warning bg-opacity-75 text-dark pb-2">
       <Container fluid="lg">
         <Row className="mb-3">
-          <Col xs sm={4}>
+          <Col sm={4}>
             <Stack
               direction="horizontal"
-              className="flex-nowrap align-items-center"
+              className="flex-nowrap align-items-center mt-3"
             >
               <Image src={imgUrl} fluid style={{ width: 48 }} />
-              <div className="fw-bold d-inline-block">
-                <span className="text-success">A</span>
-                <span className="text-dark">nimal</span>
-                <span className="text-success">Z</span>
+              <div className="fw-bold d-inline-block mt-auto">
+                <span className="text-success h5">A</span>
+                <span className="text-dark h5">nimal</span>
+                <span className="text-success h5">Z</span>
               </div>
             </Stack>
-            <strong style={{ fontSize: 10, fontWeight: "normal" }}>
+            <strong style={{ fontSize: 16, fontWeight: "normal" }}>
               This website was designed by the Animalz team with the purpose of
               increasing people's knowledge about animals, especially pets. Wise
               people are happy with animals.
@@ -56,15 +57,15 @@ const Footer = ({ imgUrl, megaMenuItems }) => {
                 <Col key={key}>
                   <h5 className="small"> {key} </h5>
                   <Nav className="flex-column">
-                    {megaMenuItems[key].map((item) => (
-                      <Nav.Link
-                        key={item}
-                        href="#"
-                        className="text-dark p-0 mb-1"
+                    {megaMenuItems[key].map((item, index) => (
+                      <Link
+                        key={index}
+                        to="/"
+                        className="text-dark text-decoration-none "
                         style={{ fontSize: 10 }}
                       >
                         {item}
-                      </Nav.Link>
+                      </Link>
                     ))}
                   </Nav>
                 </Col>
@@ -78,7 +79,7 @@ const Footer = ({ imgUrl, megaMenuItems }) => {
           <span className="fw-bold text-danger">
             {" "}
             {String.fromCharCode(0x00a9)}{" "}
-          </span>{" "}
+          </span>
           <small>AnimalZ Design and Development team.</small>
         </p>
       </Container>
