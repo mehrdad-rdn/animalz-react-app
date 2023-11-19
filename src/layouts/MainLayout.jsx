@@ -1,6 +1,7 @@
 import NavigationBar from "../components/navbar";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.png";
+import ScrollTopBtn from "../components/ScrollTopBtn";
 
 const MainLayout = ({ children }) => {
   const megaMenuItems = {
@@ -15,6 +16,7 @@ const MainLayout = ({ children }) => {
       <NavigationBar imgUrl={logo} />
       {children}
       <Footer imgUrl={logo} megaMenuItems={megaMenuItems} />
+      <ScrollTopBtn />
     </>
   );
 };
