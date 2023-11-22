@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardText, CardTitle } from "react-bootstrap";
+import { Card, CardBody, CardText, CardTitle } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 const SectionsCard = ({ title, description, linkTo }) => {

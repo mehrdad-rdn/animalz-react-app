@@ -75,3 +75,20 @@ code {
     background-color: #B0D9B1 !important;
     border-color: #79AC78 !important;
 }
+
+
+#sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+.active>.page-link, .page-link.active {
+    z-index: 3;
+    color:  var(--bs-secondary);
+    background-color: var(--bs-dark);
+    border-color: var(--bs-success);
+}
+
+.page-link {
+    color:  var(--bs-success);
+    background-color: var(--bs-light);
+}

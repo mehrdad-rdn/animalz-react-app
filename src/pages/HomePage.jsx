@@ -14,6 +14,7 @@ import scImage from "../assets/showcasseImage.svg";
 import SectionsCard from "../components/SectionsCard";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import img1 from "../assets/irish-setter.webp";
+import { Link } from "react-router-dom";
 
 function Home() {
   const sectionsCardData = [
@@ -142,9 +143,12 @@ function Home() {
             <p className="lead text-secondary mt-3 me-3">
               Explore our blog and see More Animal News, Facts, Rankings ,...
             </p>
-            <Button variant="warning" className="ms-auto py-0 text-nowrap ">
+            <Link
+              to="/blog"
+              className="btn btn-warning ms-auto py-0 text-nowrap "
+            >
               Explore Blog <BsChevronDoubleRight className="h5 mt-2 p-0" />
-            </Button>
+            </Link>
           </Stack>
         </Container>
       </section>
