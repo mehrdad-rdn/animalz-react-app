@@ -8,9 +8,6 @@ const BreedFinderForm = ({ characteristics }) => {
     const selectionInit = {};
     Object.values(characteristics).forEach((arr) => {
       selectionInit[arr.list[0].title] = [];
-      arr.list.forEach(({ title, level }) => {
-        selectionInit[title].push({ [level]: false });
-      });
     });
     return selectionInit;
   };
@@ -28,23 +25,19 @@ const BreedFinderForm = ({ characteristics }) => {
   function handleCheks(title, level) {
     setSelection({
       ...selectedItems,
-      [title]: selectedItems[title].map((item) =>
-        Object.keys(item)[0] === level.toString()
-          ? { [level]: !Object.values(item)[0] }
-          : item
-      ),
+      [title]: selectedItems[title].some((item) => item === level)
+        ? selectedItems[title].filter((item) => item !== level)
+        : [...selectedItems[title], level],
     });
   }
 
   const submitHandler = (e) => {
     e.preventDefault();
-    Object.values(selectedItems).some((arr) =>
-      arr.some((item) =>
-        Object.values(item).some((checked) => checked === true)
-      )
-    )
+
+    Object.values(selectedItems).some((arr) => arr.length)
       ? console.log(selectedItems)
-      : alert("nothing selected");
+      : alert("Please select at least one item before Submit");
+
     clearHandler(e);
   };
 
@@ -87,12 +80,7 @@ const BreedFinderForm = ({ characteristics }) => {
                   label={`${level}. ${label}`}
                   value={level}
                   data-title={title}
-                  checked={
-                    selectedItems[title] &&
-                    selectedItems[title].find(
-                      (item) => Object.keys(item)[0] === level.toString()
-                    )[level]
-                  }
+                  checked={selectedItems[title].some((item) => item === level)}
                   onChange={() => handleCheks(title, level)}
                   key={level}
                   style={{
