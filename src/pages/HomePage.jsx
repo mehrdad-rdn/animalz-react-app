@@ -1,20 +1,12 @@
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  Image,
-  InputGroup,
-  Row,
-  Stack,
-} from "react-bootstrap";
-import { BsChevronDoubleRight, BsSearch } from "react-icons/bs";
+import { Button, Col, Container, Image, Row, Stack } from "react-bootstrap";
+import { BsChevronDoubleRight } from "react-icons/bs";
 import MainLayout from "../layouts/MainLayout";
 import scImage from "../assets/showcasseImage.svg";
 import SectionsCard from "../components/SectionsCard";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import img1 from "../assets/irish-setter.webp";
 import { Link } from "react-router-dom";
+import SearchForm from "../components/SearchForm";
 
 function Home() {
   const sectionsCardData = [
@@ -93,16 +85,11 @@ function Home() {
               </p>
             </Col>
             <Col md={4} lg={6}>
-              <InputGroup>
-                <Form.Control
-                  placeholder="Animal Name"
-                  aria-label="animal Search"
-                  aria-describedby="searchBtn"
-                />
-                <Button variant="warning" size="lg" id="searchBtn">
-                  <BsSearch />
-                </Button>
-              </InputGroup>
+              <SearchForm
+                theme="light"
+                placeHolder="Animal Name"
+                lableby="animal Search"
+              />
             </Col>
           </Row>
         </Container>

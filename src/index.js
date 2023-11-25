@@ -5,8 +5,13 @@ import Home from "./pages/HomePage";
 import Blog from "./pages/Blog";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
+import DogBreeds from "./DogBreeds";
 
-const router = createBrowserRouter([{ path: "/", element: <Home /> },{ path:"/blog", element: <Blog /> }]);
+const router = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/blog", element: <Blog /> },
+  { path: "/dogBreeds", element: <DogBreeds /> },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

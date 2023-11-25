@@ -29,7 +29,7 @@ const NavigationBar = ({ brand, imgUrl }) => {
                   A-Z ltis
                 </Link>
                 <NavDropdown.Divider />
-                <Link to="/" className="dropdown-item">
+                <Link to="/dogBreeds" className="dropdown-item">
                   Dogs
                 </Link>
                 <Link to="/" className="dropdown-item">
@@ -39,8 +39,8 @@ const NavigationBar = ({ brand, imgUrl }) => {
                   Birds
                 </Link>
               </NavDropdown>
-              <Link to="/" className="nav-link">
-                Last Articles
+              <Link to="/blog" className="nav-link">
+                Articles
               </Link>
               <Link to="/" className="nav-link">
                 Abute Us

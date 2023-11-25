@@ -6,7 +6,7 @@ const SidebarLayout = ({ children, bg }) => {
     <aside
       as="aside"
       id="sidebar"
-      className="order-last order-md-first start position-sticky top-0 overflow-scroll"
+      className="order-last order-md-first start position-sticky top-0 overflow-scroll rounded"
       style={{ height: "100dvh", backgroundColor: bg }}
     >
       <Stack
