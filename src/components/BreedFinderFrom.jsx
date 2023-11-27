@@ -72,7 +72,7 @@ const BreedFinderForm = ({ characteristics }) => {
             <Accordion.Header onClick={acordionHandler}>
               {char.header}
             </Accordion.Header>
-            <Accordion.Body className="d-flex flex-wrap p-1 bg-light">
+            <Accordion.Body className="d-flex flex-wrap p-1 bg-light justify-content-between">
               {char.list.map(({ label, title, level }) => (
                 <Form.Check
                   type="checkbox"
@@ -87,7 +87,6 @@ const BreedFinderForm = ({ characteristics }) => {
                     fontSize: "10px",
                     margin: " 0 3px",
                     display: "flex",
-                    alignItems: "center",
                   }}
                 />
               ))}

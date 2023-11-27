@@ -74,23 +74,22 @@ const Blog = () => {
                     {title}
                   </Link>
                 ))}
-                <hl className="w-100 align-self-center bg-warning m-3 pt-1 d-none d-md-block" />
+                <hr className="w-100 align-self-center bg-warning m-3 pt-1 d-none d-md-block" />
                 <h5 className=" text-warning w-100 flex-grow-1 mt-3">
                   Articles Categories
                 </h5>
                 {aticleCategories.map((category, index) => (
-                  <div className="text-secondary">
+                  <div className="text-secondary" key={index}>
                     <span>{`${index + 1}.  `}</span>
                     <Link
                       className="text-secondary text-decoration-none py-2 small"
                       to="/blog"
-                      key={index}
                     >
                       {category}
                     </Link>
                   </div>
                 ))}
-                <hl className="w-100 align-self-center bg-warning m-3 pt-1 d-none d-md-block" />
+                <hr className="w-100 align-self-center bg-warning m-3 pt-1 d-none d-md-block" />
               </SidebarLayout>
             </Col>
             <Col md={9} as="section" className="order-first order-md-2">
@@ -103,7 +102,6 @@ const Blog = () => {
                 {articlesData.map((data, index) => (
                   <ImageVerticalCard
                     imgUrl={data.imgUrl}
-                    header={data.header}
                     title={data.title}
                     abstract={data.abstract}
                     linkTo={data.linkTo}

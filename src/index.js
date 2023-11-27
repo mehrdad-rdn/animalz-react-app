@@ -5,7 +5,7 @@ import Home from "./pages/HomePage";
 import Blog from "./pages/Blog";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css";
-import DogBreeds from "./DogBreeds";
+import DogBreeds from "./pages/DogBreeds";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },

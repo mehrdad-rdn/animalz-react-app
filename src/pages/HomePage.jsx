@@ -94,9 +94,9 @@ function Home() {
           </Row>
         </Container>
       </section>
-      <section id="homeCards" className="bg-light my-3 ">
-        <Container fluid="md">
-          <Row xs={1} md={2} lg={3} className="justify-content-center g-2">
+      <section id="homeCards" className="bg-light py-3 ">
+        <Container fluid="lg">
+          <Row xs={1} sm={2} md={3} className="justify-content-center g-2">
             {sectionsCardData.map((data, index) => (
               <Col key={index}>
                 <SectionsCard
