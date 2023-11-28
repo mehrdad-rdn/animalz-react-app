@@ -2,24 +2,41 @@ import { Card, Stack, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 
-const BreedCharsCard = ({ breedChar }) => {
-  
+const BreedCharsCard = ({ breedChar, kind }) => {
+  let charList = [];
+  switch (kind) {
+    case "cat":
+      charList = ["shedding", "playfulness", "grooming"];
+      break;
+    case "dog":
+      charList = [
+        "shedding",
+        "protectiveness",
+        "trainability",
+        "energy",
+        "barking",
+      ];
+      break;
+
+    default:
+      break;
+  }
   return (
     <Col>
       <Card className="bg-light h-100" style={{ minWidth: "11rem" }}>
-        <Card.Img variant="top" src={breedChar.image_link} />
+        <div className="ratio ratio-4x3 d-flex">
+          <Card.Img
+            variant="top"
+            src={breedChar.image_link}
+            className="object-fit-cover"
+          />
+        </div>
         <Card.Body className="p-1 d-flex flex-column ">
           <Card.Title className="text-capitalize small">
             {breedChar.name}
           </Card.Title>
           <div className=" mt-auto pb-2 ">
-            {[
-              "shedding",
-              "protectiveness",
-              "trainability",
-              "energy",
-              "barking",
-            ].map((title, index) => (
+            {charList.map((title, index) => (
               <Stack variant="vertical" key={index}>
                 <div className="d-flex flex-row flex-nowrap justify-content-between align-items-center">
                   <span
@@ -44,7 +61,7 @@ const BreedCharsCard = ({ breedChar }) => {
             ))}
           </div>
           <Link
-            to={`/dogBreeds/${breedChar.name.replace(/\s/g, "-")}`}
+            to={`/${kind}/${breedChar.name.replace(/\s/g, "-")}`}
             className="btn btn-dark w-100"
           >
             See Full Article

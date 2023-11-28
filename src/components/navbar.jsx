@@ -29,22 +29,22 @@ const NavigationBar = ({ brand, imgUrl }) => {
                   A-Z ltis
                 </Link>
                 <NavDropdown.Divider />
-                <Link to="/dogBreeds" className="dropdown-item">
+                <Link to="/dog" className="dropdown-item">
                   Dogs
                 </Link>
-                <Link to="/" className="dropdown-item">
+                <Link to="/cat" className="dropdown-item">
                   cats
                 </Link>
-                <Link to="/" className="dropdown-item">
+                <Link to="/bird" className="dropdown-item">
                   Birds
                 </Link>
               </NavDropdown>
               <Link to="/blog" className="nav-link">
                 Articles
               </Link>
-              <Link to="/" className="nav-link">
+              <a href="#about" className="nav-link">
                 Abute Us
-              </Link>
+              </a>
             </Nav>
           </Navbar.Collapse>
         </Container>

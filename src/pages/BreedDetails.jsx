@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { Image } from "react-bootstrap";
-import { dogBreeds } from "../assets/data";
+import { dogBreeds, catBreeds } from "../assets/data";
 import { BsChevronRight } from "react-icons/bs";
 
 //  sampleResponse = [
@@ -34,9 +34,20 @@ import { BsChevronRight } from "react-icons/bs";
 // ];
 
 const BreedDetails = () => {
-  const { breedName } = useParams();
-  console.log(dogBreeds);
-  const breedChar = dogBreeds.find(
+  const { petKind, breedName } = useParams();
+  let breedData = "";
+  switch (petKind) {
+    case "dog":
+      breedData = dogBreeds;
+      break;
+    case "cat":
+      breedData = catBreeds;
+      break;
+
+    default:
+      break;
+  }
+  const breedChar = breedData.find(
     (item) => item.name.replace(/\s/g, "-") === breedName
   );
   const { image_link, name } = breedChar;
@@ -46,7 +57,7 @@ const BreedDetails = () => {
         <Image src={image_link} fluid />
         <h2>{name}</h2>
         <Link
-          to="/dogBreeds"
+          to={`/${petKind}`}
           className="btn btn-outline-success btn-lg ms-auto my-5 me-5"
         >
           Back <BsChevronRight />

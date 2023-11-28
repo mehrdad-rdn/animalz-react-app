@@ -45,7 +45,7 @@ const Footer = ({ imgUrl, megaMenuItems }) => {
                 <span className="text-success h5">Z</span>
               </div>
             </Stack>
-            <strong style={{ fontSize: 16, fontWeight: "normal" }}>
+            <strong id="about" style={{ fontSize: 16, fontWeight: "normal" }}>
               This website was designed by the Animalz team with the purpose of
               increasing people's knowledge about animals, especially pets. Wise
               people are happy with animals.

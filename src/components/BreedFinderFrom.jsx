@@ -1,9 +1,9 @@
 import { Stack, Form, Button, Accordion } from "react-bootstrap";
 import { BsFunnelFill } from "react-icons/bs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-const BreedFinderForm = ({ characteristics }) => {
+const BreedFinderForm = ({ characteristics, kind }) => {
   const selectionInitialize = () => {
     const selectionInit = {};
     Object.values(characteristics).forEach((arr) => {
@@ -11,8 +11,18 @@ const BreedFinderForm = ({ characteristics }) => {
     });
     return selectionInit;
   };
+  const activeInit = () => [];
   const [activeTabs, setActiveTabs] = useState([]);
-  const [selectedItems, setSelection] = useState(() => selectionInitialize());
+  const [selectedItems, setSelection] = useState(selectionInitialize());
+  useEffect(() => {
+    console.log("component on mount");
+    setActiveTabs([]);
+    setSelection(selectionInitialize());
+    return () => {
+      console.log("component will unmount");
+      setActiveTabs([]);
+    };
+  }, [kind]);
 
   const acordionHandler = (e) => {
     setActiveTabs(
@@ -23,6 +33,8 @@ const BreedFinderForm = ({ characteristics }) => {
   };
 
   function handleCheks(title, level) {
+    console.log(selectedItems[title].some((item) => item === level));
+
     setSelection({
       ...selectedItems,
       [title]: selectedItems[title].some((item) => item === level)
@@ -80,7 +92,10 @@ const BreedFinderForm = ({ characteristics }) => {
                   label={`${level}. ${label}`}
                   value={level}
                   data-title={title}
-                  checked={selectedItems[title].some((item) => item === level)}
+                  checked={
+                    selectedItems[title] &&
+                    selectedItems[title].some((item) => item === level)
+                  }
                   onChange={() => handleCheks(title, level)}
                   key={level}
                   style={{
