@@ -76,10 +76,11 @@ code {
   background-color: #ffb000 !important;
 }
 
-
-#sidebar::-webkit-scrollbar {
+::-webkit-scrollbar {
   display: none;
 }
+
+/* <MyPagination /> styles */
 
 .active > .page-link,
 .page-link.active {
@@ -93,6 +94,7 @@ code {
   background-color: var(--bs-light);
 }
 
+/* <BreedFinderForm /> styles */
 .accordion-button {
   padding: 5px;
   font-size: 15px;
@@ -123,6 +125,52 @@ code {
 .form-check-input:checked {
   background-color: var(--bs-dark);
   border-color: var(--bs-success);
+}
+
+/* <Tabs /> Styling */
+
+.nav.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  border: none;
+  overflow: scroll;
+  position: relative;
+  z-index: 10;
+}
+.nav.nav-tabs::before {
+  background-color: var(--bs-secondary);
+  content: "";
+  display: block;
+  position: absolute;
+  height: 1px;
+  min-width: 800px;
+  bottom: 0;
+  left: 0;
+  right: -100px;
+  z-index: -1;
+}
+
+.nav-tabs button.nav-link {
+  border-color: var(--bs-success);
+  border-width: 2px;
+  border-style: solid solid none;
+  background-color: var(--bs-dark);
+  margin: 0 0.15rem;
+  white-space: nowrap;
+  color: var(--bs-success);
+}
+.nav-tabs button.nav-link.active {
+  border-style: outset;
+  border-width: 2px;
+  border-color: var(--bs-secondary) var(--bs-secondary) transparent;
+  background-color: var(--bs-dark);
+  color: var(--bs-secondary);
+  margin-bottom: -1px;
+}
+
+.nav-tabs button.nav-link:hover {
+  border-color: var(--bs-secondary) var(--bs-secondary) transparent;
+  background-color: var(--bs-dark);
 }
 
 @media screen and (max-width: 575px) {

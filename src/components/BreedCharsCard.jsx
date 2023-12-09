@@ -6,15 +6,21 @@ const BreedCharsCard = ({ breedChar, kind }) => {
   let charList = [];
   switch (kind) {
     case "cat":
-      charList = ["shedding", "playfulness", "grooming"];
+      charList = [
+        "shedding",
+        "playfulness",
+        "meowing",
+        "intelligence",
+        "grooming",
+      ];
       break;
     case "dog":
       charList = [
         "shedding",
         "protectiveness",
         "trainability",
-        "energy",
         "barking",
+        "drooling",
       ];
       break;
 

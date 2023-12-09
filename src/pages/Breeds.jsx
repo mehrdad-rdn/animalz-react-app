@@ -16,7 +16,6 @@ const Breeds = () => {
     return <NotFoundErr />;
   }
   const data = petData.find((obj) => obj.kind === petKind);
-  console.log(data);
 
   let breedData = "";
   switch (petKind) {
@@ -64,7 +63,7 @@ const Breeds = () => {
       <main className="bg-dark">
         <Container fluid="lg">
           <Row xs={1} sm={2} className="py-3">
-            <Col xs={12} sm={4}>
+            <Col xs={12} sm={6} md={4}>
               <SidebarLayout bg={`var(--bs-light)`}>
                 <Stack direction="vertical" gap={3} className="m-2">
                   <section id="search-box">
@@ -91,7 +90,7 @@ const Breeds = () => {
                 </Stack>
               </SidebarLayout>
             </Col>
-            <Col xs={12} sm={8}>
+            <Col xs={12} sm={6} md={8}>
               <Accordion flush>
                 <Card>
                   <Card.Header className="p-0">

@@ -11,17 +11,12 @@ const BreedFinderForm = ({ characteristics, kind }) => {
     });
     return selectionInit;
   };
-  const activeInit = () => [];
   const [activeTabs, setActiveTabs] = useState([]);
   const [selectedItems, setSelection] = useState(selectionInitialize());
   useEffect(() => {
     console.log("component on mount");
     setActiveTabs([]);
     setSelection(selectionInitialize());
-    return () => {
-      console.log("component will unmount");
-      setActiveTabs([]);
-    };
   }, [kind]);
 
   const acordionHandler = (e) => {
@@ -50,7 +45,7 @@ const BreedFinderForm = ({ characteristics, kind }) => {
       ? console.log(selectedItems)
       : alert("Please select at least one item before Submit");
 
-    clearHandler(e);
+    // clearHandler(e);
   };
 
   function clearHandler(e) {
@@ -77,7 +72,7 @@ const BreedFinderForm = ({ characteristics, kind }) => {
           Clear
         </Button>
       </Stack>
-      <hr className="w-100 bg-warning my-0 pt-1 rounded-pill" />
+      <hr className=" text-warning border border-warning border-2 rounded m-0" />
       <Accordion flush alwaysOpen activeKey={activeTabs} id="filter-accordion">
         {characteristics.map((char, index) => (
           <Accordion.Item eventKey={`${char.header}`} key={index}>
@@ -93,8 +88,8 @@ const BreedFinderForm = ({ characteristics, kind }) => {
                   value={level}
                   data-title={title}
                   checked={
-                    selectedItems[title] &&
-                    selectedItems[title].some((item) => item === level)
+                    selectedItems[title]?.some((item) => item === level) ||
+                    false
                   }
                   onChange={() => handleCheks(title, level)}
                   key={level}
@@ -109,7 +104,7 @@ const BreedFinderForm = ({ characteristics, kind }) => {
           </Accordion.Item>
         ))}
       </Accordion>
-      <hr className="w-100 bg-warning my-0 pt-1 rounded-pill" />
+      <hr className=" text-warning border border-warning border-2 rounded m-0" />
       <Stack direction="horizontal" className="mt-1">
         <Button type="submit" size="sm" variant="dark">
           Submit

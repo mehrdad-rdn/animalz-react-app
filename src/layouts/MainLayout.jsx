@@ -1,3 +1,4 @@
+import { ScrollRestoration } from "react-router-dom";
 import NavigationBar from "../components/navbar";
 import Footer from "../components/Footer";
 import logo from "../assets/logo.png";
@@ -17,6 +18,7 @@ const MainLayout = ({ children }) => {
       {children}
       <Footer imgUrl={logo} megaMenuItems={megaMenuItems} />
       <ScrollTopBtn />
+      <ScrollRestoration />
     </>
   );
 };
