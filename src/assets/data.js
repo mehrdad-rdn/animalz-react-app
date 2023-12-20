@@ -35590,7 +35590,7 @@ const charTabsData = [
       },
       {
         petKind: "dog",
-        title: "WATCHDOG/PROTECTIVE NATURE",
+        title: "WATCHDOG / PROTECTIVE NATURE",
         minTitle: "What's Mine Is Yours",
         maxTitle: "Vigilant",
         scoreFrom: "protectiveness",

@@ -12,12 +12,14 @@ import "./index.css";
 import Breeds from "./pages/Breeds";
 import BreedDetails from "./pages/BreedDetails";
 import NotFoundErr from "./pages/NotFoundErr";
+import CompareBreeds from "./pages/CompareBreeds";
 
 const router = createBrowserRouter([
   { path: "/", element: <Home /> },
   { path: "/blog", element: <Blog /> },
   { path: `/:petKind`, element: <Breeds /> },
   { path: "/:petKind/:breedName", element: <BreedDetails /> },
+  { path: "/:petKind/compare", element: <CompareBreeds /> },
   { path: "*", element: <NotFoundErr /> },
 ]);
 

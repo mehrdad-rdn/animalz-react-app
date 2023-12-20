@@ -13,11 +13,13 @@ const BreedFinderForm = ({ characteristics, kind }) => {
   };
   const [activeTabs, setActiveTabs] = useState([]);
   const [selectedItems, setSelection] = useState(selectionInitialize());
-  useEffect(() => {
-    console.log("component on mount");
-    setActiveTabs([]);
-    setSelection(selectionInitialize());
-  }, [kind]);
+  useEffect(
+    () => {
+      setActiveTabs([]);
+      setSelection(selectionInitialize());
+    }, // eslint-disable-next-line
+    [kind]
+  );
 
   const acordionHandler = (e) => {
     setActiveTabs(

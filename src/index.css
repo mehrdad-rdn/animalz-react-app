@@ -173,6 +173,7 @@ code {
   background-color: var(--bs-dark);
 }
 
+
 @media screen and (max-width: 575px) {
   .carousel-caption {
     position: static;

@@ -10,6 +10,7 @@ const SearchForm = ({
   className,
   theme,
   btnVariant,
+  findItem,
 }) => {
   const [searchQuery, setQuery] = useState("");
   const inputFocusHandler = (e) => {
@@ -30,16 +31,16 @@ const SearchForm = ({
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(searchQuery);
+    findItem(searchQuery);
     setQuery("");
   };
   return (
     <Form onSubmit={submitHandler}>
-      <InputGroup>
+      <InputGroup className={className}>
         <Form.Control
           placeholder={placeHolder}
           aria-label={lableby}
           aria-describedby={describedby}
-          className={className}
           data-bs-theme={theme}
           style={{
             backgroundColor: `${theme === "dark" ? "#004225" : "#f5f5dc"}`,
