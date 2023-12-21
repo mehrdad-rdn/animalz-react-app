@@ -3,9 +3,14 @@ import { BsSearch } from "react-icons/bs";
 import PropTypes from "prop-types";
 import "../styles/searchBarStyle.css";
 
-const SearchBar = ({ placeholder, breeds, findItem, btnVariant, theme }) => {
+const SearchBar = ({ placeholder, breeds, callback, btnVariant, theme }) => {
+  //Defining searchtem state to manage search input
   const [searchTerm, setTerm] = useState("");
+
+  //Defining results state to manage suggestions list
   const [results, setResults] = useState([]);
+
+  // Handle changes in the suggestions list when the search term is changed.
   useEffect(
     () => {
       switch (searchTerm.length) {
@@ -27,9 +32,10 @@ const SearchBar = ({ placeholder, breeds, findItem, btnVariant, theme }) => {
     [searchTerm]
   );
 
+  // Perform required actions after form submission
   const submitHandler = (e) => {
     e.preventDefault();
-    findItem(searchTerm);
+    callback(searchTerm);
     setTerm("");
   };
 
@@ -75,7 +81,7 @@ SearchBar.defaultProps = {
 SearchBar.prototype = {
   placeholder: PropTypes.string,
   breeds: PropTypes.array,
-  findItem: PropTypes.func,
+  callback: PropTypes.func,
   btnVariant: PropTypes.string,
   theme: PropTypes.string,
 };

@@ -1,23 +1,32 @@
+import { useContext, useEffect, useState } from "react";
 import { Stack } from "react-bootstrap";
-import { DogImgPlaceholder } from "../assets/BreedDetailsSVG";
-import { charTabsData, petData } from "../assets/data";
-import { useEffect, useState } from "react";
-import SearchBar from "./SearchBar";
 import { BsXCircle } from "react-icons/bs";
 
-const CompareColumn = ({
-  petKind,
-  removeCallback,
-  colIndex,
-  findItem,
-  breeds,
-  breedObj,
-}) => {
-  const [breedChar, setBreed] = useState(null);
-  useEffect(() => {
-    setBreed(breedObj);
-  }, [breedObj]);
+import SearchBar from "./SearchBar";
+import { compareContext } from "../components/Contexes";
+import { charTabsData, petData } from "../assets/data";
+import { DogImgPlaceholder } from "../assets/BreedDetailsSVG";
+import { dogBreeds, catBreeds } from "../assets/data";
 
+const CompareColumn = ({ petKind, colIndex }) => {
+  //Defining a relative data array based on the pet type value.
+  const breeds = petKind === "dog" ? dogBreeds : catBreeds;
+
+  //retrieve the upper level state from the context in order to utilize its data and setter function in event handlers
+  const [breedsArr, setBreedsArr] = useContext(compareContext);
+
+  // Defining the breed state to store the characteristics of the breed between renders
+  const [breedChar, setBreed] = useState(null);
+
+  useEffect(
+    () => {
+      const breed = breedsArr[colIndex];
+      setBreed(breed);
+    }, // eslint-disable-next-line
+    [breedsArr]
+  );
+
+  //find matching label for characteristics
   const labelFinder = (char) => {
     let result;
     petData
@@ -34,6 +43,48 @@ const CompareColumn = ({
     return result;
   };
 
+  // Set breedArr and breedChar states to display details of matching breed with the search term
+  const findItem = (searchTerm) => {
+    const result = breeds.find((item) =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    if (result) {
+      const nullIndex = breedsArr.findIndex((item) => item === null);
+      const newArr = breedsArr.map((item, index) =>
+        index === nullIndex ? result : item
+      );
+      if (breedChar === null) {
+        setBreedsArr(
+          nullIndex === 0
+            ? newArr
+            : newArr.length === 5
+            ? newArr
+            : [...newArr, null]
+        );
+      } else {
+        setBreedsArr(
+          breedsArr.map((item, index) => (index === colIndex ? result : item))
+        );
+      }
+      return true;
+    } else {
+      console.log("no items match");
+    }
+  };
+
+  //handle removing clicked column
+  const removeItem = (colIndex, e) => {
+    e.preventDefault();
+    setBreedsArr(
+      breedsArr[breedsArr.length - 1] === null
+        ? breedsArr.length === 2
+          ? [null, null]
+          : breedsArr.filter((_, index) => index !== colIndex)
+        : [...breedsArr.filter((_, index) => index !== colIndex), null]
+    );
+  };
+
   return (
     <Stack direction="vertical" gap={2} className="align-items-center col-2 ">
       {breedChar ? (
@@ -42,7 +93,7 @@ const CompareColumn = ({
             href="/"
             className="rounded-circle bg-light position-absolute "
             style={{ top: "-10px", left: "-10px" }}
-            onClick={(e) => removeCallback(colIndex, e)}
+            onClick={(e) => removeItem(colIndex, e)}
           >
             <BsXCircle className="text-dark h3 m-0" />
           </a>
@@ -67,7 +118,7 @@ const CompareColumn = ({
         btnVariant="dark"
         breeds={breeds}
         placeholder="Breed Name"
-        findItem={(searchQuery) => findItem(searchQuery, breedChar, colIndex)}
+        callback={(searchTerm) => findItem(searchTerm)}
       />
       {breedChar && (
         <Stack direction="vertical">

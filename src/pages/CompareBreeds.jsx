@@ -1,59 +1,18 @@
-import { Container, Stack } from "react-bootstrap";
-import { dogBreeds, catBreeds } from "../assets/data";
-import { useParams } from "react-router-dom";
-import CompareColumn from "../components/CompareColumn";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { Container, Stack } from "react-bootstrap";
+import { compareContext } from "../components/Contexes";
+import CompareColumn from "../components/CompareColumn";
 
 const CompaireBreeds = () => {
+  // Assign the value of "petkind" using URL.
   const { petKind } = useParams();
 
+  //Defining a state to store which breed the user would like to compare
   const [breedsArr, setBreedsArr] = useState(Array(2).fill(null));
 
-  const breeds = petKind === "dog" ? dogBreeds : catBreeds;
-
-  const findItem = (searchQuery, breedChar, colIndex) => {
-    const result = breeds.find((item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
-    if (result) {
-      const nullIndex = breedsArr.findIndex((item) => item === null);
-      const newArr = breedsArr.map((item, index) =>
-        index === nullIndex ? result : item
-      );
-      if (breedChar === null) {
-        setBreedsArr(
-          nullIndex === 0
-            ? newArr
-            : newArr.length === 5
-            ? newArr
-            : [...newArr, null]
-        );
-      } else {
-        setBreedsArr(
-          breedsArr.map((item, index) => (index === colIndex ? result : item))
-        );
-        // console.log(breedChar.name, breedsArr.for);
-      }
-      return true;
-    } else {
-      console.log("no items match");
-    }
-  };
-
-  const removeItem = (colIndex, e) => {
-    e.preventDefault();
-    setBreedsArr(
-      breedsArr[breedsArr.length - 1] === null
-        ? breedsArr.length === 2
-          ? [null, null]
-          : breedsArr.filter((_, index) => index !== colIndex)
-        : [...breedsArr.filter((_, index) => index !== colIndex), null]
-    );
-  };
-
   return (
-    <>
+    <compareContext.Provider value={[breedsArr, setBreedsArr]}>
       <header className="bg-dark">
         <Container fluid="lg" className="text-center py-5">
           <h1 className="text-warning">Compare Breeds</h1>
@@ -74,21 +33,13 @@ const CompaireBreeds = () => {
             gap={1}
             className="justify-content-center my-2"
           >
-            {breedsArr.map((item, index) => (
-              <CompareColumn
-                key={index}
-                petKind={petKind}
-                colIndex={index}
-                breeds={breeds}
-                breedObj={item}
-                findItem={findItem}
-                removeCallback={removeItem}
-              />
+            {breedsArr.map((_, index) => (
+              <CompareColumn key={index} petKind={petKind} colIndex={index} />
             ))}
           </Stack>
         </Container>
       </main>
-    </>
+    </compareContext.Provider>
   );
 };
 
