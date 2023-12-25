@@ -1,63 +1,42 @@
-import { Stack, Form, Button, Accordion } from "react-bootstrap";
+import { Stack, Form, Button } from "react-bootstrap";
 import { BsFunnelFill } from "react-icons/bs";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import PropTypes from "prop-types";
+import CheckboxAccordion from "./chekboxAccordion";
 
-const BreedFinderForm = ({ characteristics, kind }) => {
-  const selectionInitialize = () => {
-    const selectionInit = {};
-    Object.values(characteristics).forEach((arr) => {
-      selectionInit[arr.list[0].title] = [];
+const BreedFinderForm = ({ characteristics }) => {
+  console.log("breed finder form component rerendered");
+
+  //declare ref to access child component sates and manage them
+  const checkBoxRef = useRef([]);
+
+  //declare ref to store user selection list
+  const selection = useRef({});
+
+  //handle submit button onclick event
+  function submitHnadler(e) {
+    e.preventDefault();
+
+    checkBoxRef.current.forEach((element) => {
+      selection.current = element.addToSelection(selection.current);
     });
-    return selectionInit;
-  };
-  const [activeTabs, setActiveTabs] = useState([]);
-  const [selectedItems, setSelection] = useState(selectionInitialize());
-  useEffect(
-    () => {
-      setActiveTabs([]);
-      setSelection(selectionInitialize());
-    }, // eslint-disable-next-line
-    [kind]
-  );
 
-  const acordionHandler = (e) => {
-    setActiveTabs(
-      activeTabs.includes(`${e.target.innerHTML}`)
-        ? activeTabs.filter((eventkey) => eventkey !== `${e.target.innerHTML}`)
-        : [...activeTabs, `${e.target.innerHTML}`]
+    console.log(
+      Object.values(selection.current).some((element) => element.length)
+        ? selection.current
+        : "select atleast one item"
     );
-  };
-
-  function handleCheks(title, level) {
-    console.log(selectedItems[title].some((item) => item === level));
-
-    setSelection({
-      ...selectedItems,
-      [title]: selectedItems[title].some((item) => item === level)
-        ? selectedItems[title].filter((item) => item !== level)
-        : [...selectedItems[title], level],
-    });
   }
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    Object.values(selectedItems).some((arr) => arr.length)
-      ? console.log(selectedItems)
-      : alert("Please select at least one item before Submit");
-
-    // clearHandler(e);
-  };
-
+  //handle clear button onclick event
   function clearHandler(e) {
     e.preventDefault();
-    setSelection(selectionInitialize());
-    setActiveTabs([]);
+    checkBoxRef.current.forEach((element) => element.clearForm());
   }
 
   return (
-    <Form onSubmit={submitHandler}>
+    // <Form onSubmit={(e) => submitHnadler(e)}>
+    <Form onSubmit={submitHnadler}>
       <Stack direction="horizontal">
         <span
           className="text-dark d-flex align-items-center"
@@ -74,38 +53,15 @@ const BreedFinderForm = ({ characteristics, kind }) => {
           Clear
         </Button>
       </Stack>
-      <hr className=" text-warning border border-warning border-2 rounded m-0" />
-      <Accordion flush alwaysOpen activeKey={activeTabs} id="filter-accordion">
-        {characteristics.map((char, index) => (
-          <Accordion.Item eventKey={`${char.header}`} key={index}>
-            <Accordion.Header onClick={acordionHandler}>
-              {char.header}
-            </Accordion.Header>
-            <Accordion.Body className="d-flex flex-wrap p-1 bg-light justify-content-between">
-              {char.list.map(({ label, title, level }) => (
-                <Form.Check
-                  type="checkbox"
-                  id={`${title}-${level}`}
-                  label={`${level}. ${label}`}
-                  value={level}
-                  data-title={title}
-                  checked={
-                    selectedItems[title]?.some((item) => item === level) ||
-                    false
-                  }
-                  onChange={() => handleCheks(title, level)}
-                  key={level}
-                  style={{
-                    fontSize: "10px",
-                    margin: " 0 3px",
-                    display: "flex",
-                  }}
-                />
-              ))}
-            </Accordion.Body>
-          </Accordion.Item>
-        ))}
-      </Accordion>
+      <hr className=" text-warning border border-warning border-2 rounded m-0 mb-1" />
+      {characteristics.map((char, index) => (
+        <CheckboxAccordion
+          key={index}
+          list={char.list}
+          header={char.header}
+          ref={(element) => (checkBoxRef.current[index] = element)}
+        />
+      ))}
       <hr className=" text-warning border border-warning border-2 rounded m-0" />
       <Stack direction="horizontal" className="mt-1">
         <Button type="submit" size="sm" variant="dark">
