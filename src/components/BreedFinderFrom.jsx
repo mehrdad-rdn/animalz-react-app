@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 import CheckboxAccordion from "./chekboxAccordion";
 
 const BreedFinderForm = ({ characteristics }) => {
-  console.log("breed finder form component rerendered");
-
   //declare ref to access child component sates and manage them
   const checkBoxRef = useRef([]);
 

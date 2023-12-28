@@ -1,34 +1,32 @@
 import { Container, Row, Stack, Col, Accordion, Card } from "react-bootstrap";
 import { BsCardText, BsFunnel } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
+
+import { catBreeds, dogBreeds, petData } from "../assets/data";
 import MainLayout from "../layouts/MainLayout";
 import SidebarLayout from "../layouts/SidebarLayout";
+import NotFoundErr from "../pages/NotFoundErr";
 import BreedFinderForm from "../components/BreedFinderFrom";
-import SearchForm from "../components/SearchForm";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import CustomToggle from "../components/CustomToggle";
 import BreedCharsCard from "../components/BreedCharsCard";
-import { catBreeds, dogBreeds, petData } from "../assets/data";
-import NotFoundErr from "../pages/NotFoundErr";
+import SearchBar from "../components/SearchBar";
+
 const Breeds = () => {
+  //extract petKind value from page URL
   const { petKind } = useParams();
-  if (!["cat", "dog"].includes(petKind)) {
+  //get relevant data for petKind from the petData object
+  const data = petData.find((obj) => obj.kind === petKind) || null;
+  // Check if the user entered the wrong URL
+  if (!data) {
     return <NotFoundErr />;
   }
-  const data = petData.find((obj) => obj.kind === petKind);
-
-  let breedData = "";
-  switch (petKind) {
-    case "dog":
-      breedData = dogBreeds;
-      break;
-    case "cat":
-      breedData = catBreeds;
-      break;
-
-    default:
-      break;
-  }
+  // define breedData based on the petKind value
+  const breedDataMap = {
+    dog: dogBreeds,
+    cat: catBreeds,
+  };
+  const breedData = breedDataMap[petKind];
 
   return (
     <MainLayout>
@@ -73,11 +71,10 @@ const Breeds = () => {
                     >
                       FIND BY BREED NAME
                     </p>
-                    <SearchForm
+                    <SearchBar
                       placeHolder={`${
                         data.kind.charAt(0).toUpperCase() + data.kind.slice(1)
                       } Breed`}
-                      lableby={`${data.kind} breed search`}
                       theme="dark"
                     />
                   </section>

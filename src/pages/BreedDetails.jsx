@@ -9,7 +9,7 @@ import {
   CompaireBreeds,
   LifeLength,
 } from "../assets/BreedDetailsSVG";
-
+import NotFoundErr from "../pages/NotFoundErr";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import BreedTraits from "../components/BreedTraits";
 
@@ -19,9 +19,13 @@ const BreedDetails = () => {
   // Select the appropriate data array based on the type of pet
   const breedData = petKind === "dog" ? dogBreeds : catBreeds;
   // Find the breed object in the data array based on its name
-  const breedChar = breedData.find(
-    (item) => item.name.replace(/\s/g, "-") === breedName
-  );
+  const breedChar =
+    breedData.find((item) => item.name.replace(/\s/g, "-") === breedName) ||
+    null;
+  //check the breedName validation
+  if (!breedChar) {
+    return <NotFoundErr />;
+  }
   // Wxtract important characteristics from the breed object
   const { image_link, name } = breedChar;
   // Define important characteristics based on the type of pet.

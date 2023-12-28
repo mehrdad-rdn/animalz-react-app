@@ -77,7 +77,8 @@ const CompareColumn = ({ petKind, colIndex }) => {
   const removeItem = (colIndex, e) => {
     e.preventDefault();
     setBreedsArr(
-      breedsArr[breedsArr.length - 1] === null
+      // breedsArr[breedsArr.length - 1] === null
+      breedsArr.at(-1) === null
         ? breedsArr.length === 2
           ? [null, null]
           : breedsArr.filter((_, index) => index !== colIndex)
@@ -88,19 +89,24 @@ const CompareColumn = ({ petKind, colIndex }) => {
   return (
     <Stack direction="vertical" gap={2} className="align-items-center col-2 ">
       {breedChar ? (
-        <div className="border border-dark border-1 m-1 rounded-top position-relative">
+        <div className="border border-dark border-1 m-1 rounded-top position-relative ratio ratio-4x3">
           <a
             href="/"
-            className="rounded-circle bg-light position-absolute "
-            style={{ top: "-10px", left: "-10px" }}
+            className=" position-absolute"
+            style={{
+              top: "-0.5rem",
+              left: "-0.25rem",
+              zIndex: "10",
+              maxWidth: "min-content",
+            }}
             onClick={(e) => removeItem(colIndex, e)}
           >
-            <BsXCircle className="text-dark h3 m-0" />
+            <BsXCircle className="text-dark h3 m-0 rounded-circle bg-light" />
           </a>
           <img
             src={breedChar.image_link}
             alt={breedChar.name}
-            className="img-fluid w-100 rounded-top "
+            className="img-fluid rounded-top object-fit-cover"
           />
         </div>
       ) : petKind === "dog" ? (

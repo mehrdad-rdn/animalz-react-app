@@ -1,15 +1,16 @@
 import { Button, Col, Container, Image, Row, Stack } from "react-bootstrap";
 import { BsChevronDoubleRight } from "react-icons/bs";
+import { Link } from "react-router-dom";
+
 import MainLayout from "../layouts/MainLayout";
 import scImage from "../assets/showcasseImage.svg";
+import img1 from "../assets/irish-setter.webp";
 import SectionsCard from "../components/SectionsCard";
 import ImageVerticalCard from "../components/imageVerticalCard";
-import img1 from "../assets/irish-setter.webp";
-import { Link } from "react-router-dom";
-import SearchForm from "../components/SearchForm";
+import Searchbar from "../components/SearchBar";
 
 function Home() {
-  const sectionsCardData = [
+  const cardsData = [
     {
       title: "A-Z Animals",
       description:
@@ -32,7 +33,7 @@ function Home() {
 
   // hard-coding data just use for preparing ui and after connecting to api will be useless
 
-  const articleCardData = [
+  const articlesData = [
     {
       // imgUrl: "https://picsum.photos/id/237/200/300",
       imgUrl: `${img1}`,
@@ -54,7 +55,6 @@ function Home() {
   ];
   return (
     <MainLayout>
-      {/* <h1 className="text-uppercase">starter content</h1> */}
       <section id="showCase" className="bg-light">
         <Container fluid="md" className="py-3">
           <Row xs={1} md={2} className="align-items-center">
@@ -85,10 +85,10 @@ function Home() {
               </p>
             </Col>
             <Col md={4} lg={6}>
-              <SearchForm
+              <Searchbar
                 theme="light"
                 placeHolder="Animal Name"
-                lableby="animal Search"
+                btnVariant="warning"
               />
             </Col>
           </Row>
@@ -97,7 +97,7 @@ function Home() {
       <section id="homeCards" className="bg-light py-3 ">
         <Container fluid="lg">
           <Row xs={1} sm={2} md={3} className="justify-content-center g-2">
-            {sectionsCardData.map((data, index) => (
+            {cardsData.map((data, index) => (
               <Col key={index}>
                 <SectionsCard
                   title={data.title}
@@ -112,7 +112,7 @@ function Home() {
       <section id="lastArticles" className="bg-dark pb-4">
         <Container fluid="lg">
           <Stack direction="horiaontal" gap={3} className="pt-3">
-            {articleCardData.map((data, index) => (
+            {articlesData.map((data, index) => (
               <ImageVerticalCard
                 imgUrl={data.imgUrl}
                 header={data.header}
