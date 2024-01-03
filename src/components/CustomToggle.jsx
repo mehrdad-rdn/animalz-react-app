@@ -17,6 +17,8 @@ const CustomToggle = ({ children, eventKey }) => {
   );
 };
 
-CustomToggle.prototype = { children: PropTypes.string.isRequired };
+CustomToggle.prototype = { children: PropTypes.string.isRequired,eventKey: PropTypes.number.isRequired };
 CustomToggle.defaultProps = { children: "Toggle Button" };
+
+
 export default CustomToggle;

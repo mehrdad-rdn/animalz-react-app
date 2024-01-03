@@ -2,7 +2,7 @@ import { Container, Row, Stack, Col, Accordion, Card } from "react-bootstrap";
 import { BsCardText, BsFunnel } from "react-icons/bs";
 import { Link, useParams } from "react-router-dom";
 
-import { catBreeds, dogBreeds, petData } from "../assets/data";
+import { petData } from "../assets/data";
 import MainLayout from "../layouts/MainLayout";
 import SidebarLayout from "../layouts/SidebarLayout";
 import NotFoundErr from "../pages/NotFoundErr";
@@ -11,22 +11,30 @@ import ImageVerticalCard from "../components/imageVerticalCard";
 import CustomToggle from "../components/CustomToggle";
 import BreedCharsCard from "../components/BreedCharsCard";
 import SearchBar from "../components/SearchBar";
+import useFetch from "../components/useFetch";
+import { useState } from "react";
 
 const Breeds = () => {
+  console.log("render breeds");
   //extract petKind value from page URL
   const { petKind } = useParams();
+  // assign breedData value from api
+  const {
+    data: breedData,
+    isLoading,
+    error,
+    setSearchParams,
+  } = useFetch(petKind, { name: " ", offset: "20" });
+
+  const [searchRsults, setSearchResults] = useState([]);
+  console.log(searchRsults);
+
   //get relevant data for petKind from the petData object
   const data = petData.find((obj) => obj.kind === petKind) || null;
   // Check if the user entered the wrong URL
   if (!data) {
     return <NotFoundErr />;
   }
-  // define breedData based on the petKind value
-  const breedDataMap = {
-    dog: dogBreeds,
-    cat: catBreeds,
-  };
-  const breedData = breedDataMap[petKind];
 
   return (
     <MainLayout>
@@ -76,12 +84,15 @@ const Breeds = () => {
                         data.kind.charAt(0).toUpperCase() + data.kind.slice(1)
                       } Breed`}
                       theme="dark"
+                      callback={(_, results) => setSearchResults(results)}
+                      petKind={petKind}
                     />
                   </section>
                   <section id="filter-form">
                     <BreedFinderForm
                       characteristics={data.characteristics}
-                      kind={data.kind}
+                      setFilter={(params) => setSearchParams(params)}
+                      petKind={petKind}
                     />
                   </section>
                 </Stack>
@@ -108,13 +119,35 @@ const Breeds = () => {
                 </Card>
               </Accordion>
               <Row xs={1} md={2} xl={3} className="my-2 g-3">
-                {breedData.map((breedChar, index) => (
-                  <BreedCharsCard
-                    breedChar={breedChar}
-                    kind={data.kind}
-                    key={index}
-                  />
-                ))}
+                {searchRsults.length ? (
+                  searchRsults.map((breedChar, index) => (
+                    <BreedCharsCard
+                      breedChar={breedChar}
+                      kind={data.kind}
+                      key={index}
+                    />
+                  ))
+                ) : isLoading ? (
+                  <p className="text-secondary lead text-center m-5">
+                    Loading...
+                  </p>
+                ) : error ? (
+                  <p className="text-secondary lead text-center m-5">
+                    {error.message}
+                  </p>
+                ) : breedData.length === 0 ? (
+                  <p className="text-secondary lead text-center m-5">
+                    "Unfortunately, there are no items matching your request."
+                  </p>
+                ) : (
+                  breedData.map((breedChar, index) => (
+                    <BreedCharsCard
+                      breedChar={breedChar}
+                      kind={data.kind}
+                      key={index}
+                    />
+                  ))
+                )}
               </Row>
             </Col>
           </Row>

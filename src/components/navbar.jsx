@@ -1,5 +1,7 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
 const NavigationBar = ({ brand, imgUrl }) => {
   return (
     <>
@@ -52,5 +54,8 @@ const NavigationBar = ({ brand, imgUrl }) => {
     </>
   );
 };
+
+NavigationBar.propTypes = { brand: PropTypes.string, imgUrl: PropTypes.any.isRequired };
+NavigationBar.defaultProps = { brand: "AnimalZ" };
 
 export default NavigationBar;

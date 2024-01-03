@@ -6,11 +6,12 @@ import SearchBar from "./SearchBar";
 import { compareContext } from "../components/Contexes";
 import { charTabsData, petData } from "../assets/data";
 import { DogImgPlaceholder } from "../assets/BreedDetailsSVG";
-import { dogBreeds, catBreeds } from "../assets/data";
-
+import useFetch from "./useFetch";
+import PropTypes from "prop-types"
 const CompareColumn = ({ petKind, colIndex }) => {
   //Defining a relative data array based on the pet type value.
-  const breeds = petKind === "dog" ? dogBreeds : catBreeds;
+
+  const { data, setSearchParams } = useFetch(petKind, { name: " " });
 
   //retrieve the upper level state from the context in order to utilize its data and setter function in event handlers
   const [breedsArr, setBreedsArr] = useContext(compareContext);
@@ -20,8 +21,7 @@ const CompareColumn = ({ petKind, colIndex }) => {
 
   useEffect(
     () => {
-      const breed = breedsArr[colIndex];
-      setBreed(breed);
+      setBreed(breedsArr[colIndex]);
     }, // eslint-disable-next-line
     [breedsArr]
   );
@@ -44,34 +44,34 @@ const CompareColumn = ({ petKind, colIndex }) => {
   };
 
   // Set breedArr and breedChar states to display details of matching breed with the search term
-  const findItem = (searchTerm) => {
-    const result = breeds.find((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    if (result) {
-      const nullIndex = breedsArr.findIndex((item) => item === null);
-      const newArr = breedsArr.map((item, index) =>
-        index === nullIndex ? result : item
-      );
-      if (breedChar === null) {
-        setBreedsArr(
-          nullIndex === 0
-            ? newArr
-            : newArr.length === 5
-            ? newArr
-            : [...newArr, null]
+  useEffect(
+    () => {
+      if (data?.length === 1) {
+        console.log(" data from col:", colIndex, "=", data);
+        const result = data[0];
+        const nullIndex = breedsArr.findIndex((item) => item === null);
+        const newArr = breedsArr.map((item, index) =>
+          index === nullIndex ? result : item
         );
+        if (breedChar === null) {
+          setBreedsArr(
+            nullIndex === 0
+              ? newArr
+              : newArr.length === 5
+              ? newArr
+              : [...newArr, null]
+          );
+        } else {
+          setBreedsArr(
+            breedsArr.map((item, index) => (index === colIndex ? result : item))
+          );
+        }
       } else {
-        setBreedsArr(
-          breedsArr.map((item, index) => (index === colIndex ? result : item))
-        );
+        console.log("no items match");
       }
-      return true;
-    } else {
-      console.log("no items match");
-    }
-  };
+    }, // eslint-disable-next-line
+    [data]
+  );
 
   //handle removing clicked column
   const removeItem = (colIndex, e) => {
@@ -122,9 +122,10 @@ const CompareColumn = ({ petKind, colIndex }) => {
       <SearchBar
         theme="light"
         btnVariant="dark"
-        breeds={breeds}
         placeholder="Breed Name"
-        callback={(searchTerm) => findItem(searchTerm)}
+        callback={(searchTerm) => setSearchParams({ name: searchTerm })}
+        // callback={(searchTerm) => findItem(searchTerm)}
+        petKind={petKind}
       />
       {breedChar && (
         <Stack direction="vertical">
@@ -196,5 +197,7 @@ const CompareColumn = ({ petKind, colIndex }) => {
     </Stack>
   );
 };
+
+CompareColumn.prototype = { petKind:PropTypes.string.isRequired, colIndex:PropTypes.number.isRequired };
 
 export default CompareColumn;

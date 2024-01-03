@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import PropTypes from "prop-types";
 import "../styles/searchBarStyle.css";
+import useFetch from "./useFetch";
 
-const SearchBar = ({ placeholder, breeds, callback, btnVariant, theme }) => {
+const SearchBar = ({ placeholder, callback, btnVariant, theme, petKind }) => {
   //Defining searchtem state to manage search input
   const [searchTerm, setTerm] = useState("");
 
@@ -11,31 +12,22 @@ const SearchBar = ({ placeholder, breeds, callback, btnVariant, theme }) => {
   const [results, setResults] = useState([]);
 
   // Handle changes in the suggestions list when the search term is changed.
+  const { data, setSearchParams } = useFetch(petKind, {});
+
   useEffect(
     () => {
-      switch (searchTerm.length) {
-        case 1:
-          setResults(
-            breeds.filter((item) =>
-              item.name.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-          );
-          break;
-        case 0:
-          setResults([]);
-          break;
-
-        default:
-          break;
-      }
+      setSearchParams({ name: searchTerm.length === 0 ? "" : searchTerm });
     }, // eslint-disable-next-line
     [searchTerm]
   );
+  useEffect(() => {
+    setResults(data?.length ? data.map((item) => item.name) : []);
+  }, [data]);
 
   // Perform required actions after form submission
   const submitHandler = (e) => {
     e.preventDefault();
-    callback(searchTerm);
+    callback(searchTerm, data || []);
     setTerm("");
   };
 
@@ -58,7 +50,7 @@ const SearchBar = ({ placeholder, breeds, callback, btnVariant, theme }) => {
         {results.length !== 0 && (
           <datalist id="results-data">
             {results.map((item, index) => (
-              <option key={index} value={item.name}></option>
+              <option key={index} value={item}></option>
             ))}
           </datalist>
         )}
@@ -80,7 +72,6 @@ SearchBar.defaultProps = {
 
 SearchBar.prototype = {
   placeholder: PropTypes.string,
-  breeds: PropTypes.array,
   callback: PropTypes.func,
   btnVariant: PropTypes.string,
   theme: PropTypes.string,

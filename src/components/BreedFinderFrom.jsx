@@ -3,8 +3,9 @@ import { BsFunnelFill } from "react-icons/bs";
 import { useRef } from "react";
 import PropTypes from "prop-types";
 import CheckboxAccordion from "./chekboxAccordion";
+import { catSizeMap, dogSizeMap, lifeSpanMap } from "../assets/data";
 
-const BreedFinderForm = ({ characteristics }) => {
+const BreedFinderForm = ({ characteristics, setFilter, petKind }) => {
   //declare ref to access child component sates and manage them
   const checkBoxRef = useRef([]);
 
@@ -19,17 +20,45 @@ const BreedFinderForm = ({ characteristics }) => {
       selection.current = element.addToSelection(selection.current);
     });
 
-    console.log(
-      Object.values(selection.current).some((element) => element.length)
-        ? selection.current
-        : "select atleast one item"
-    );
+    let newItems = {};
+    for (const key in selection.current) {
+      const value = selection.current[key];
+      if (value.length === 0) {
+        delete selection.current[key];
+      } else {
+        switch (key) {
+          case "size":
+            newItems =
+              petKind === "dog"
+                ? { ...newItems, ...dogSizeMap[value] }
+                : { ...newItems, ...catSizeMap[value] };
+            delete selection.current[key];
+            break;
+
+          case "life-expectansy":
+            newItems = { ...newItems, ...lifeSpanMap[value] };
+            delete selection.current[key];
+            break;
+
+          default:
+            break;
+        }
+      }
+    }
+    if (Object.keys(newItems).length !== 0) {
+      selection.current = { ...selection.current, ...newItems };
+    }
+    Object.values(selection.current).some((element) => element !== "")
+      ? setFilter(selection.current)
+      : alert("select atleast one item");
   }
 
   //handle clear button onclick event
   function clearHandler(e) {
     e.preventDefault();
     checkBoxRef.current.forEach((element) => element.clearForm());
+    selection.current = {};
+    setFilter({ name: " " });
   }
 
   return (
@@ -80,6 +109,8 @@ const BreedFinderForm = ({ characteristics }) => {
 
 BreedFinderForm.prototype = {
   characteristics: PropTypes.object.isRequired,
+  setFilter: PropTypes.func.isRequired,
+  petKind: PropTypes.string.isRequired,
 };
 
 export default BreedFinderForm;

@@ -2,6 +2,8 @@ import { Tabs, Tab, Container, Row, Stack } from "react-bootstrap";
 import BreedTabsItem from "../components/BreedTabsItem";
 import { useState } from "react";
 import { charTabsData } from "../assets/data";
+import propTypes from "prop-types";
+
 const BreedTraits = ({ petKind, breedChar }) => {
   //declare tabKey state to manage breed traits tabs
   const [tabKey, setTabKey] = useState(charTabsData[0].tabName);
@@ -72,6 +74,11 @@ const BreedTraits = ({ petKind, breedChar }) => {
       </Tabs>
     </section>
   );
+};
+
+BreedTraits.propType = {
+  petKind: propTypes.string.isRequired,
+  breedChar: propTypes.object.isRequired,
 };
 
 export default BreedTraits;

@@ -7,7 +7,7 @@ const CheckboxAccordion = forwardRef(function CheckboxAccordion(
   { header, list },
   ref
 ) {
-  const [checkedItems, setChecked] = useState({ [list[0].title]: [] });
+  const [checkedItems, setChecked] = useState({ [list[0].title]: "" });
   const [isActive, setActive] = useState(false);
 
   //Expose custom functions to parent component with ref for state management.
@@ -29,11 +29,7 @@ const CheckboxAccordion = forwardRef(function CheckboxAccordion(
   };
   //handle onclick event for checkboxes
   const handleCheks = (title, level) => {
-    setChecked({
-      [title]: checkedItems[title].some((item) => item === level)
-        ? checkedItems[title].filter((item) => item !== level)
-        : [...checkedItems[title], level],
-    });
+    setChecked({ [title]: checkedItems[title] === level ? "" : level });
   };
 
   return (
@@ -53,9 +49,7 @@ const CheckboxAccordion = forwardRef(function CheckboxAccordion(
               label={`${level}. ${label}`}
               value={level}
               data-title={title}
-              checked={
-                checkedItems[title]?.some((item) => item === level) || false
-              }
+              checked={checkedItems[title] === level || false}
               onChange={() => handleCheks(title, level)}
               key={level}
               style={{

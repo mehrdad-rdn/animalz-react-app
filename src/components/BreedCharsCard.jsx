@@ -1,5 +1,6 @@
 import { Card, Stack, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types"
 
 
 const BreedCharsCard = ({ breedChar, kind }) => {
@@ -67,7 +68,8 @@ const BreedCharsCard = ({ breedChar, kind }) => {
             ))}
           </div>
           <Link
-            to={`/${kind}/${breedChar.name.replace(/\s/g, "-")}`}
+            // to={`/${kind}/${breedChar.name.replace(/\s/g, "-")}`}
+            to={breedChar.name}
             className="btn btn-dark w-100"
           >
             See Full Article
@@ -78,4 +80,8 @@ const BreedCharsCard = ({ breedChar, kind }) => {
   );
 };
 
+BreedCharsCard.propTypes = {
+  breedChar: PropTypes.object.isRequired,
+  kind: PropTypes.string.isRequired,
+};
 export default BreedCharsCard;

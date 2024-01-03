@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import { Carousel, Col, Container, Row, Stack } from "react-bootstrap";
-import { dogBreeds, catBreeds, petData } from "../assets/data";
+import { petData } from "../assets/data";
 import { BsChevronLeft } from "react-icons/bs";
 import {
   BreedHeight,
@@ -12,41 +12,60 @@ import {
 import NotFoundErr from "../pages/NotFoundErr";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import BreedTraits from "../components/BreedTraits";
+import useFetch from "../components/useFetch";
+import { useEffect, useRef } from "react";
 
 const BreedDetails = () => {
+  console.log("breed details rendered");
   //extracting data from url-params
   const { petKind, breedName } = useParams();
-  // Select the appropriate data array based on the type of pet
-  const breedData = petKind === "dog" ? dogBreeds : catBreeds;
+  const breedNameRef = useRef(breedName);
+  useEffect(
+    () => {
+      if (breedNameRef.current !== breedName) {
+        setSearchParams({ name: breedName });
+        breedNameRef.current = breedName;
+      }
+    }, // eslint-disable-next-line
+    [breedName]
+  );
+
   // Find the breed object in the data array based on its name
-  const breedChar =
-    breedData.find((item) => item.name.replace(/\s/g, "-") === breedName) ||
-    null;
+  const { data, isLoading, setSearchParams } = useFetch(petKind, {
+    name: breedName,
+  });
+  const { data: localData } = useFetch(petKind, {
+    name: " ",
+    offset: `${Math.floor(Math.random() * 180)}`,
+  });
+
   //check the breedName validation
-  if (!breedChar) {
+  if (isLoading) {
+    return <h1 className=" text-center text-dark m-5">Loading...</h1>;
+  } else if (data.length === 0) {
     return <NotFoundErr />;
   }
-  // Wxtract important characteristics from the breed object
+
+  const breedChar = data[0];
+
+  // Extract important characteristics from the breed object
   const { image_link, name } = breedChar;
   // Define important characteristics based on the type of pet.
   const majorChars =
     petKind === "dog"
       ? ["protectiveness", "trainability", "energy"]
       : ["playfulness", "other_pets_friendly", "children_friendly"];
-
   //Find similar breeds based on important characteristics defined earlier.
   let similarBreeds = [];
   let prevItem = [name];
-  while (prevItem.length <= 3) {
-    const newItem = breedData.find(
-      // eslint-disable-next-line
-      (breed) =>
-        !prevItem.includes(breed.name) &&
-        majorChars.some((item) => breed[item] === breedChar[item])
-    );
-    if (newItem !== undefined) {
-      prevItem = [...prevItem, newItem.name];
-      similarBreeds = [...similarBreeds, newItem];
+
+  if (localData?.length) {
+    for (let i = 0; i < 3; i++) {
+      const newItem = localData[Math.floor(Math.random() * localData.length)];
+      if (newItem !== undefined && !prevItem.includes(newItem.name)) {
+        prevItem = [...prevItem, newItem.name];
+        similarBreeds = [...similarBreeds, newItem];
+      }
     }
   }
 
@@ -86,7 +105,7 @@ const BreedDetails = () => {
                 </li>
                 <li className="breadcrumb-item">
                   <Link
-                    to={-1}
+                    to={`/${petKind}`}
                     className="text-capitalize link-success"
                   >{`${petKind} breeds`}</Link>
                 </li>
@@ -258,7 +277,7 @@ const BreedDetails = () => {
                       imgUrl={breed.image_link}
                       title={breed.name}
                       abstract={headerMainChars(breed)}
-                      linkTo={`/${petKind}/${breed.name.replace(/\s/g, "-")}`}
+                      linkTo={`/${petKind}/${breed.name}`}
                       key={index}
                     />
                   ))}
