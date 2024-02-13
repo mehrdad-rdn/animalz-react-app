@@ -12,10 +12,9 @@ import CustomToggle from "../components/CustomToggle";
 import BreedCharsCard from "../components/BreedCharsCard";
 import SearchBar from "../components/SearchBar";
 import useFetch from "../components/useFetch";
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
 const Breeds = () => {
-  console.log("render breeds");
   //extract petKind value from page URL
   const { petKind } = useParams();
   // assign breedData value from api
@@ -26,8 +25,42 @@ const Breeds = () => {
     setSearchParams,
   } = useFetch(petKind, { name: " ", offset: "20" });
 
-  const [searchRsults, setSearchResults] = useState([]);
-  console.log(searchRsults);
+  const [searchResults, setSearchResults] = useState([]);
+  const SearchBarRef = useRef();
+  const observer = useRef();
+  const rootRef = useRef();
+  const lastElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            if (searchResults.length) {
+              console.log("search results last item intersecting");
+              SearchBarRef.current?.addkNewItems();
+            } else {
+              const isMore = breedData.length === 20 ? true : false;
+              isMore &&
+                setSearchParams((Prev) => {
+                  console.log({
+                    ...Prev,
+                    offset: Prev.offset ? Prev.offset + 20 : 20,
+                  });
+                  return {
+                    ...Prev,
+                    offset: Prev.offset ? Number(Prev.offset) + 20 : 20,
+                  };
+                });
+            }
+          }
+        }
+        // { root: rootRef.current } // option
+      );
+      if (node) observer.current.observe(node);
+    },
+    [isLoading]
+  );
 
   //get relevant data for petKind from the petData object
   const data = petData.find((obj) => obj.kind === petKind) || null;
@@ -84,8 +117,9 @@ const Breeds = () => {
                         data.kind.charAt(0).toUpperCase() + data.kind.slice(1)
                       } Breed`}
                       theme="dark"
-                      callback={(_, results) => setSearchResults(results)}
+                      callback={(results) => setSearchResults(results)}
                       petKind={petKind}
+                      ref={SearchBarRef}
                     />
                   </section>
                   <section id="filter-form">
@@ -118,15 +152,24 @@ const Breeds = () => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-              <Row xs={1} md={2} xl={3} className="my-2 g-3">
-                {searchRsults.length ? (
-                  searchRsults.map((breedChar, index) => (
-                    <BreedCharsCard
-                      breedChar={breedChar}
-                      kind={data.kind}
-                      key={index}
-                    />
-                  ))
+              <Row ref={rootRef} xs={1} md={2} xl={3} className="my-2 g-3">
+                {searchResults.length ? (
+                  searchResults.map((breedChar, index) =>
+                    index === searchResults.length - 1 ? (
+                      <div ref={lastElementRef} key={index}>
+                        <BreedCharsCard
+                          breedChar={breedChar}
+                          kind={data.kind}
+                        />
+                      </div>
+                    ) : (
+                      <BreedCharsCard
+                        breedChar={breedChar}
+                        kind={data.kind}
+                        key={index}
+                      />
+                    )
+                  )
                 ) : isLoading ? (
                   <p className="text-secondary lead text-center m-5">
                     Loading...
@@ -140,13 +183,22 @@ const Breeds = () => {
                     "Unfortunately, there are no items matching your request."
                   </p>
                 ) : (
-                  breedData.map((breedChar, index) => (
-                    <BreedCharsCard
-                      breedChar={breedChar}
-                      kind={data.kind}
-                      key={index}
-                    />
-                  ))
+                  breedData.map((breedChar, index) =>
+                    index === breedData.length - 1 ? (
+                      <div ref={lastElementRef} key={index}>
+                        <BreedCharsCard
+                          breedChar={breedChar}
+                          kind={data.kind}
+                        />
+                      </div>
+                    ) : (
+                      <BreedCharsCard
+                        breedChar={breedChar}
+                        kind={data.kind}
+                        key={index}
+                      />
+                    )
+                  )
                 )}
               </Row>
             </Col>
