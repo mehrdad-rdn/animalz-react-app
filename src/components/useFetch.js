@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+
 const useFetch = (petKind, urlPararms) => {
   const [data, setData] = useState(null);
   const [isLoading, setLoading] = useState(true);
@@ -10,6 +11,7 @@ const useFetch = (petKind, urlPararms) => {
   useEffect(() => {
     const fetchHandle = async () => {
       const key = `${petKind}-${JSON.stringify(searchParams)}`;
+      // use localStorage data for the search term if it exists
       const localData = JSON.parse(storage.getItem(key));
       if (localData) {
         setData(localData);
@@ -20,7 +22,6 @@ const useFetch = (petKind, urlPararms) => {
       const url = `${process.env.REACT_APP_BASE_URL}/${petKind}s${
         params.size !== 0 ? `?${params}` : ""
       }`;
-      console.log(url);
       const headers = {
         [process.env.REACT_APP_KEY_NAME]: process.env.REACT_APP_KEY_VALUE,
       };
@@ -32,6 +33,7 @@ const useFetch = (petKind, urlPararms) => {
         const response = await fetch(url, { headers, signal });
         const data = await response.json();
         setData(data);
+
         // if (data.length === 0) {
         //   throw new Error(
         //     "Unfortunately, there are no items matching your request."

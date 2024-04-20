@@ -19,12 +19,9 @@ const CompareColumn = ({ petKind, colIndex }) => {
   // Defining the breed state to store the characteristics of the breed between renders
   const [breedChar, setBreed] = useState(null);
 
-  useEffect(
-    () => {
-      setBreed(breedsArr[colIndex]);
-    }, // eslint-disable-next-line
-    [breedsArr]
-  );
+  useEffect(() => {
+    setBreed(breedsArr[colIndex]);
+  }, [breedsArr, colIndex]);
 
   //find matching label for characteristics
   const labelFinder = (char) => {
