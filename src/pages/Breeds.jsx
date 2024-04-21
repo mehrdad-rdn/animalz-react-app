@@ -12,22 +12,58 @@ import CustomToggle from "../components/CustomToggle";
 import BreedCharsCard from "../components/BreedCharsCard";
 import SearchBar from "../components/SearchBar";
 import useFetch from "../components/useFetch";
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
 
 const Breeds = () => {
-  console.log("render breeds");
   //extract petKind value from page URL
   const { petKind } = useParams();
   // assign breedData value from api
   const {
-    data: breedData,
+    data: fetchData,
     isLoading,
     error,
     setSearchParams,
-  } = useFetch(petKind, { name: " ", offset: "20" });
+  } = useFetch(petKind, { name: " " });
 
-  const [searchRsults, setSearchResults] = useState([]);
-  console.log(searchRsults);
+  const [searchResults, setSearchResults] = useState([]);
+  const searchSuccess = searchResults.length ? true : false;
+  const SearchBarRef = useRef();
+  const observer = useRef();
+  const rootRef = useRef();
+  const isMore = fetchData?.length === 20 ? true : false;
+  const collectedDataRef = useRef([]);
+  const lastElementRef = useCallback(
+    (node) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            if (searchSuccess) {
+              SearchBarRef.current?.addkNewItems();
+            } else {
+              if (isMore) {
+                collectedDataRef.current = collectedDataRef.current.length
+                  ? [...collectedDataRef.current, ...fetchData]
+                  : fetchData;
+                setSearchParams((Prev) => {
+                  return {
+                    ...Prev,
+                    offset: Prev.offset ? Number(Prev.offset) + 20 : 20,
+                  };
+                });
+              } else {
+                collectedDataRef.current = [];
+              }
+            }
+          }
+        }
+        // { root: rootRef.current } // option
+      );
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, isMore, searchSuccess]
+  );
 
   //get relevant data for petKind from the petData object
   const data = petData.find((obj) => obj.kind === petKind) || null;
@@ -35,6 +71,11 @@ const Breeds = () => {
   if (!data) {
     return <NotFoundErr />;
   }
+
+  const breedData =
+    collectedDataRef.current.length !== 0
+      ? [...collectedDataRef.current, ...fetchData]
+      : fetchData;
 
   return (
     <MainLayout>
@@ -84,8 +125,9 @@ const Breeds = () => {
                         data.kind.charAt(0).toUpperCase() + data.kind.slice(1)
                       } Breed`}
                       theme="dark"
-                      callback={(_, results) => setSearchResults(results)}
+                      callback={(results) => setSearchResults(results)}
                       petKind={petKind}
+                      ref={SearchBarRef}
                     />
                   </section>
                   <section id="filter-form">
@@ -118,19 +160,47 @@ const Breeds = () => {
                   </Accordion.Collapse>
                 </Card>
               </Accordion>
-              <Row xs={1} md={2} xl={3} className="my-2 g-3">
-                {searchRsults.length ? (
-                  searchRsults.map((breedChar, index) => (
-                    <BreedCharsCard
-                      breedChar={breedChar}
-                      kind={data.kind}
-                      key={index}
-                    />
-                  ))
+              <Row ref={rootRef} xs={1} md={2} xl={3} className="my-2 g-3">
+                {searchResults.length ? (
+                  searchResults.map((breedChar, index) =>
+                    index === searchResults.length - 1 ? (
+                      <div ref={lastElementRef} key={index}>
+                        <BreedCharsCard
+                          breedChar={breedChar}
+                          kind={data.kind}
+                        />
+                      </div>
+                    ) : (
+                      <BreedCharsCard
+                        breedChar={breedChar}
+                        kind={data.kind}
+                        key={index}
+                      />
+                    )
+                  )
                 ) : isLoading ? (
-                  <p className="text-secondary lead text-center m-5">
-                    Loading...
-                  </p>
+                  <>
+                    {collectedDataRef.current.length &&
+                      collectedDataRef.current.map((breedChar, index) =>
+                        index === breedData.length - 1 ? (
+                          <div ref={lastElementRef} key={index}>
+                            <BreedCharsCard
+                              breedChar={breedChar}
+                              kind={data.kind}
+                            />
+                          </div>
+                        ) : (
+                          <BreedCharsCard
+                            breedChar={breedChar}
+                            kind={data.kind}
+                            key={index}
+                          />
+                        )
+                      )}
+                    <p className="text-secondary lead text-center m-5">
+                      Loading...
+                    </p>
+                  </>
                 ) : error ? (
                   <p className="text-secondary lead text-center m-5">
                     {error.message}
@@ -140,13 +210,22 @@ const Breeds = () => {
                     "Unfortunately, there are no items matching your request."
                   </p>
                 ) : (
-                  breedData.map((breedChar, index) => (
-                    <BreedCharsCard
-                      breedChar={breedChar}
-                      kind={data.kind}
-                      key={index}
-                    />
-                  ))
+                  breedData.map((breedChar, index) =>
+                    index === breedData.length - 1 ? (
+                      <div ref={lastElementRef} key={index}>
+                        <BreedCharsCard
+                          breedChar={breedChar}
+                          kind={data.kind}
+                        />
+                      </div>
+                    ) : (
+                      <BreedCharsCard
+                        breedChar={breedChar}
+                        kind={data.kind}
+                        key={index}
+                      />
+                    )
+                  )
                 )}
               </Row>
             </Col>
