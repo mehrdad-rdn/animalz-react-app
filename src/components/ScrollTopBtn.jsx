@@ -42,8 +42,8 @@ const ScrollTopBtn = () => {
         <Button
           variant="outline-warning"
           size="lg"
-          className="bg-dark bg-opacity-50 rounded-circle position-fixed bottom-0 end-0 translate-middle d-flex flex-column align-items-center"
-          style={{ zIndex: 10 }}
+          className="bg-dark bg-opacity-50 rounded-pill position-fixed bottom-0 end-0 m-5 d-flex flex-column align-items-center"
+          style={{ zIndex: 10, width: 90 }}
           onClick={clickHandler}
         >
           <BsArrowUp className="text-warning fs-4 m-0" />

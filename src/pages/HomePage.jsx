@@ -8,25 +8,24 @@ import img1 from "../assets/irish-setter.webp";
 import SectionsCard from "../components/SectionsCard";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import Searchbar from "../components/SearchBar";
+import { useTranslation } from "react-i18next";
 
 function Home() {
+  const { t } = useTranslation(["home"]);
   const cardsData = [
     {
+      name: "animal",
       title: "A-Z Animals",
-      description:
-        "See lists of animals that start with every letter of the alphabet, from A to Z. We track all types of animals like lions and tigers, dogs and cats, even dinosaurs and spiders.Choose your favorite letter below to see all animals that start with it today.",
       linkTo: "/",
     },
     {
+      name: "dog",
       title: "A-Z Dog Breeds",
-      description:
-        "Our comprehensive database of dog breeds includes detailed information on over 300 different breeds. Each entry provides a thorough description of the breed's characteristics, including size, temperament, exercise needs, grooming requirements ,...",
       linkTo: "/",
     },
     {
+      name: "cat",
       title: "A-Z Cat Breeds",
-      description:
-        "Our extensive database of cat breeds features detailed information on over 70 different breeds. Each entry provides a comprehensive description of the breed's characteristics, including size, temperament, grooming needs, activity levels, and potential health issues.",
       linkTo: "/",
     },
   ];
@@ -60,16 +59,12 @@ function Home() {
           <Row xs={1} md={2} className="align-items-center">
             <div className="text-center text-md-start">
               <h1 className="text-dark">
-                Find Your Favorite<span className="text-success">Animal</span>
+                {t("find_favorite")}
+                <span className="text-success">{t("animal")}</span>
               </h1>
-              <p className="lead my-3">
-                Discover the strongest, smartest, and fastest animals in the
-                world by searching below, or scroll to see all animals listed
-                from A-Z. We are the largest website of our kind for wild animal
-                and pet lovers worldwide!
-              </p>
+              <p className="lead my-3">{t("find_favoriot_desc")}</p>
               <Button variant="success" size="lg" className="my-3 px-4">
-                See Them All
+                {t("see_all")}
               </Button>
             </div>
             <Image src={scImage} fluid className="user-select-none"></Image>
@@ -80,9 +75,7 @@ function Home() {
         <Container fluid="md" className="pt-1">
           <Row md={1} lg={2} className="py-3">
             <Col md={8} lg={6}>
-              <p className="h5 text-warning">
-                Search for any animal you would like to learn more about
-              </p>
+              <p className="h5 text-warning">{t("animal_search_desc")}</p>
             </Col>
             <Col md={4} lg={6}>
               <Searchbar
@@ -101,7 +94,8 @@ function Home() {
               <Col key={index}>
                 <SectionsCard
                   title={data.title}
-                  description={data.description}
+                  description={t(`${data.name}_desc`)}
+                  // description={data.description}
                   linkTo={data.linkTo}
                 />
               </Col>

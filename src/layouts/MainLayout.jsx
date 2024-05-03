@@ -1,26 +1,31 @@
-import { ScrollRestoration } from "react-router-dom";
-import NavigationBar from "../components/navbar";
-import Footer from "../components/Footer";
-import logo from "../assets/logo.png";
-import ScrollTopBtn from "../components/ScrollTopBtn";
+import { lazy, Suspense } from "react";
+import ThemeProvider from "react-bootstrap/ThemeProvider";
+// import "../index.css";
 
-const MainLayout = ({ children }) => {
-  const megaMenuItems = {
-    animals: ["a-z list", "categories", "search", "random Facts"],
-    dogs: ["a-z list", "Suitable Dog", "search", "random Facts"],
-    cats: ["a-z list", "Suitable Cat", "search", "random Facts"],
-    birds: ["a-z list", "Suitable Bird", "search", "random Facts"],
-  };
+const MainLtr = lazy(() => import("./MainLtr"));
+const MainRtl = lazy(() => import("./MainRtl"));
 
+function MainLayout({ children }) {
   return (
-    <>
-      <NavigationBar imgUrl={logo} />
-      {children}
-      <Footer imgUrl={logo} megaMenuItems={megaMenuItems} />
-      <ScrollTopBtn />
-      <ScrollRestoration />
-    </>
+    <Suspense fallback={<Loading />}>
+      {localStorage.getItem("i18nextLng") === "fa" ? (
+        <ThemeProvider dir="rtl">
+          <MainRtl>{children}</MainRtl>
+        </ThemeProvider>
+      ) : (
+        <ThemeProvider dir="ltr">
+          <MainLtr>{children}</MainLtr>
+        </ThemeProvider>
+      )}
+    </Suspense>
   );
-};
-
+}
 export default MainLayout;
+
+function Loading() {
+  <div className="bg-dark text-secondary">
+    <div className="container-lg">
+      <h1>Loading...</h1>
+    </div>
+  </div>;
+}

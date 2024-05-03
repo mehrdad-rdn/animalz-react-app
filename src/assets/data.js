@@ -34301,19 +34301,7 @@ const petData = [
     kind: "cat",
     headerImg: `${require("../assets/Cute kitten walking outdoors.jpg")}`,
     breedImg: `${require("../assets/cat-white-background.jpg")}`,
-    breedAbstract:
-      "When discussing cat breeds, it's important to note that there are numerous breeds, each with its own unique characteristics and traits. From the elegant Siamese to the playful Maine Coon and the exotic Bengal, the world of cat breeds is diverse and fascinating.",
-    breedArticle: `Cat breeds are distinct groups of domestic cats that have been selectively bred over generations to exhibit specific physical and behavioral traits. These traits can include coat color, pattern, length, and texture, as well as personality traits such as temperament, intelligence, and activity level.
 
-One of the most popular and well-known cat breeds is the Persian, known for its long, luxurious coat and sweet, gentle nature. The Siamese, on the other hand, is recognized for its striking blue almond-shaped eyes and vocal, sociable personality. The Maine Coon, often referred to as the "gentle giant," is one of the largest domesticated cat breeds, characterized by its tufted ears, bushy tail, and friendly demeanor.
-
-Other notable cat breeds include the Abyssinian, known for its ticked coat and active, playful nature, and the Sphynx, a hairless breed with a warm, affectionate personality. The Ragdoll, with its striking blue eyes and tendency to go limp when picked up, and the Scottish Fold, recognized for its unique folded ears, are also popular choices among cat enthusiasts.
-
-In addition to these well-known breeds, there are countless other breeds, each with its own distinct history, appearance, and temperament. Whether you're drawn to the regal and aloof nature of the Russian Blue or the wild appearance of the Savannah, there is a cat breed to suit every preference and lifestyle.
-
-When considering adding a cat to your family, it's important to research different breeds to find one that aligns with your preferences and living situation. Whether you're seeking a sociable, outgoing breed or a more independent and low-maintenance companion, understanding the characteristics of different cat breeds can help you make an informed decision when selecting a new feline friend.
-
-In conclusion, the world of cat breeds is rich and diverse, offering a wide array of options for potential cat owners. From long-haired beauties to sleek, exotic breeds, each cat breed has its own unique charm and appeal. By exploring the characteristics and traits of different breeds, you can find the perfect feline companion to enrich your life and bring joy to your home.`,
     characteristics: [
       {
         header: "Playfulness",
@@ -34394,38 +34382,7 @@ In conclusion, the world of cat breeds is rich and diverse, offering a wide arra
     kind: "dog",
     headerImg: `${require("../assets/golden retrevir.jpg")}`,
     breedImg: `${require("../assets/Scottish-Terrier-On-White-02.webp")}`,
-    breedAbstract:
-      "People have been breeding dogs since prehistoric times. The earliest dog breeders used wolves to create domestic dogs. From the beginning, humans purposefully bred dogs to perform various tasks. Hunting, guarding, and herding are thought to be among the earliest job…",
-    breedArticle: `For thousands of years, humans bred dogs toward the
-                        physical and mental traits best suited for the work
-                        expected of them. The sleek Greyhound types bred to
-                        chase fleet-footed prey, and the huge mastiff types used
-                        as guard dogs and warriors, are two ancient examples of
-                        dogs bred for specific jobs. As humans became more
-                        sophisticated, so did their dogs. Eventually, there
-                        emerged specific breeds of dogs, custom-bred to suit the
-                        breeders’ local needs and circumstances. The Greyhound,
-                        for instance, was the foundation type for the immense
-                        Irish Wolfhound and the dainty Italian Greyhound. All
-                        three have a distinct family resemblance, but you’d
-                        never mistake one for another. So, then, when is a breed
-                        a breed and not just a kind or type of dog? The simplest
-                        way to define a breed is to say it always “breeds true.”
-                        That is, breeding a purebred Irish Setter to another
-                        purebred Irish Setter will always produce dogs instantly
-                        recognizable as Irish Setters. Each breed’s ideal
-                        physical traits, movement, and temperament are set down
-                        in a written document called a “breed standard.” For
-                        example, the breed standard sets forth the traits that
-                        make a Cocker Spaniel a Cocker Spaniel and not a
-                        Springer Spaniel. The AKC standard for each breed
-                        originates with a “parent club,” the AKC-recognized
-                        national club devoted to a particular breed. Once
-                        approved by the AKC, a standard becomes both the
-                        breeder’s “blueprint” and the instrument used by dog
-                        show judges to evaluate a breeder’s work. There are over
-                        340 dog breeds known throughout the world. The American
-                        Kennel Club recognizes 200 breeds.`,
+
     characteristics: [
       {
         header: "Protectiveness",

@@ -1,12 +1,14 @@
 import { forwardRef, useImperativeHandle, useState } from "react";
 import { Accordion, Form } from "react-bootstrap";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 //declaring component with forwardRef to take a ref from parrent component
 const CheckboxAccordion = forwardRef(function CheckboxAccordion(
   { header, list },
   ref
 ) {
+  const { t } = useTranslation(["filterForm"]);
   const [checkedItems, setChecked] = useState({ [list[0].title]: "" });
   const [isActive, setActive] = useState(false);
 
@@ -46,7 +48,7 @@ const CheckboxAccordion = forwardRef(function CheckboxAccordion(
             <Form.Check
               type="checkbox"
               id={`${title}-${level}`}
-              label={`${level}. ${label}`}
+              label={`${level}. ${t(label)}`}
               value={level}
               data-title={title}
               checked={checkedItems[title] === level || false}

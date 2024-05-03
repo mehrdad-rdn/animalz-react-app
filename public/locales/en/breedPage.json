@@ -1,0 +1,17 @@
+{
+  "home": "home",
+  "dog_breeds": "dog breeds",
+  "cat_breeds": "cat breeds",
+  "avg_size_age": "Average Size and Life Expectancy Of The Breed",
+  "height": "HEIGHT",
+  "in": "inches",
+  "weight": "WEIGHT",
+  "lbs": "Pounds",
+  "age": "LIFE EXPECTANCY",
+  "year": "Years",
+  "compare_breeds": "Compare Breeds",
+  "compare_breeds_desc": "See how the {{name}} stacks up to other breeds by comparing traits",
+  "compare_breeds_btn": "COMPARE BREEDS",
+  "back": "Back",
+  "explore_breeds": "Explore Other Breeds"
+}

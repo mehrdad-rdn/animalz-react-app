@@ -2,33 +2,10 @@
 import PropTypes from "prop-types";
 import { Container, Row, Col, Stack, Image, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = ({ imgUrl, megaMenuItems }) => {
-  // const MenuItems = ({ items }) => {
-  //   return items.map((item) => (
-  //     <Nav.Link
-  //       key={item}
-  //       href="#"
-  //       className="text-dark p-0 mb-1"
-  //       style={{ fontSize: 10 }}
-  //     >
-  //       {item}
-  //     </Nav.Link>
-  //   ));
-  // };
-
-  // const CreateMegaMenu = ({ megamenu }) => {
-  //   const newArray = Object.keys(megaMenuItems);
-  //   return newArray.map((key) => (
-  //     <Col key={key}>
-  //       <h5 className="small"> {key} </h5>
-  //       <Nav className="flex-column">
-  //         <MenuItems items={megamenu[key]} />
-  //       </Nav>
-  //     </Col>
-  //   ));
-  // };
-
+  const { t } = useTranslation();
   return (
     <div className="bg-warning bg-opacity-75 text-dark pb-2">
       <Container fluid="lg">
@@ -46,9 +23,7 @@ const Footer = ({ imgUrl, megaMenuItems }) => {
               </div>
             </Stack>
             <strong id="about" style={{ fontSize: 16, fontWeight: "normal" }}>
-              This website was designed by the Animalz team with the purpose of
-              increasing people's knowledge about animals, especially pets. Wise
-              people are happy with animals.
+              {t("about_us")}
             </strong>
           </Col>
           <Col className="mt-auto">
@@ -80,7 +55,7 @@ const Footer = ({ imgUrl, megaMenuItems }) => {
             {" "}
             {String.fromCharCode(0x00a9)}{" "}
           </span>
-          <small>AnimalZ Design and Development team.</small>
+          <small>{t("copyWright")}</small>
         </p>
       </Container>
     </div>

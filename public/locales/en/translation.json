@@ -1,0 +1,22 @@
+{
+  "navbarItems": {
+    "dropDown": {
+      "row1": "A-Z ltis",
+      "row2": "Dogs",
+      "row3": "Cats",
+      "row4": "Birds"
+    },
+    "item1": "Menu",
+    "item2": "blog",
+    "item3": "about Us"
+  },
+  "langBtn": {
+    "title": "Languages",
+    "langName": {
+      "en": "English",
+      "fa": "فارسی"
+    }
+  },
+  "about_us": "This website was designed by the Animalz team with the purpose of increasing people's knowledge about animals, especially pets. Wise people are happy with animals.",
+  "copyWright": "AnimalZ Design and Development team."
+}

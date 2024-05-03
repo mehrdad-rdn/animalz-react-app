@@ -13,15 +13,18 @@ import NotFoundErr from "../pages/NotFoundErr";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import BreedTraits from "../components/BreedTraits";
 import useFetch from "../components/useFetch";
+import { useTranslation } from "react-i18next";
 
 const BreedDetailsComponent = ({ breedName, petKind }) => {
+  //use i18 next with useTranslation hook
+  const { t } = useTranslation(["breedPage"]);
   // Fetch Breed data using it's name
   const { data, isLoading } = useFetch(petKind, {
     name: breedName,
   });
   const { data: localData } = useFetch(petKind, {
     name: " ",
-    offset: `${Math.floor(Math.random() * 180)}`,
+    offset: `${Math.floor(Math.random() * (petKind === "dog" ? 180 : 40))}`,
   });
 
   //check the breedName validation
@@ -85,14 +88,16 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
               <ol className="breadcrumb">
                 <li className="breadcrumb-item">
                   <Link to="/" className="text-capitalize link-success">
-                    Home
+                    {t("home")}
                   </Link>
                 </li>
                 <li className="breadcrumb-item">
                   <Link
                     to={`/${petKind}`}
                     className="text-capitalize link-success"
-                  >{`${petKind} breeds`}</Link>
+                  >
+                    {t(`${petKind}_breeds`)}
+                  </Link>
                 </li>
                 <li className="breadcrumb-item text-capitalize text-dark">
                   {name}
@@ -105,8 +110,12 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
           {" "}
           <Container fluid="lg" className="position-relative">
             <div
-              className="position-absolute top-0 start-0 end-0 bg-dark"
-              style={{ height: window.innerWidth < 880 ? "90dvw" : "40dvw" }}
+              className="position-absolute top-0 bg-dark"
+              style={{
+                height: window.innerWidth < 880 ? "90dvw" : "40dvw",
+                left: 0,
+                right: 0,
+              }}
             ></div>
             <div
               id="wrapper"
@@ -149,14 +158,14 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
           <Container fluid="lg">
             <div className="d-flex flex-wrap flex-lg-nowrap justify-content-center pt-4">
               <h5 className="text-success  p-2 col-lg-4">
-                Average Size and Life Expectancy Of The Breed
+                {t("avg_size_age")}
               </h5>
               <div className="d-flex flex-fill flex-column flex-md-row justify-content-md-evenly">
                 {petKind === "dog" && (
                   <div className=" hstack gap-2 mx-auto mb-4">
                     <BreedHeight />
                     <div className="vstack">
-                      <p className="text-success lead">HEIGHT</p>
+                      <p className="text-success lead">{t("height")}</p>
                       <p className="text-dark text-nowrap mb-0">
                         {Math.min(
                           breedChar.min_height_male,
@@ -167,7 +176,7 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
                           breedChar.max_height_male,
                           breedChar.max_height_female
                         )}{" "}
-                        inches
+                        {t("in")}
                       </p>
                     </div>
                   </div>
@@ -175,7 +184,7 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
                 <div className="hstack gap-2 mx-auto mb-4 ">
                   <BreedWeight />
                   <div className="vstack">
-                    <p className="text-success lead">WEIGHT</p>
+                    <p className="text-success lead">{t("weight")}</p>
                     <p className="text-dark text-nowrap mb-0">
                       {breedChar.min_weight_male
                         ? Math.min(
@@ -190,7 +199,7 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
                             breedChar.max_weight_female
                           )
                         : breedChar.max_weight}{" "}
-                      Ibs
+                      {t("lbs")}
                     </p>
                   </div>
                 </div>
@@ -201,11 +210,11 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
                       className="text-success lead"
                       style={{ width: "5rem", lineHeight: "1rem" }}
                     >
-                      LIFE EXPECTANCY
+                      {t("age")}
                     </p>
                     <p className="text-dark text-nowrap mb-0">
                       {breedChar.min_life_expectancy} -{" "}
-                      {breedChar.max_life_expectancy} Years
+                      {breedChar.max_life_expectancy} {t("year")}
                     </p>
                   </div>
                 </div>
@@ -220,10 +229,9 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
             <Row xs={1} lg={2}>
               <Col lg={6} className="order-last order-lg-first mt-5 ">
                 <Stack direction="vertical">
-                  <h1 className="text-dark">Compare Breeds</h1>
+                  <h1 className="text-dark">{t("compare_breeds")}</h1>
                   <p className="text-success">
-                    See how the {name} stacks up to other breeds by comparing
-                    traits
+                    {t("compare_breeds_desc", { name: `${name}` })}
                   </p>
                   <div className="hstack flex-nowrap justify-content-between position-relative mb-2">
                     <div
@@ -244,18 +252,18 @@ const BreedDetailsComponent = ({ breedName, petKind }) => {
                     </div>
                   </div>
                   <Link to={`/${petKind}/compare`} className="btn btn-dark">
-                    COMPARE BREEDS
+                    {t("compare_breeds_btn")}
                   </Link>
                 </Stack>
                 <Link
                   to={-1}
                   className="btn btn-outline-success btn-lg bg-dark bg-opacity-10  mt-5"
                 >
-                  <BsChevronLeft /> Back
+                  <BsChevronLeft /> {t("back")}
                 </Link>
               </Col>
               <Col lg={6} className="order-first order-lg-last mt-5">
-                <h1 className="text-dark ">Explore Other Breeds</h1>
+                <h1 className="text-dark ">{t("explore_breeds")}</h1>
                 <div className="vstack gap-2">
                   {similarBreeds.map((breed, index) => (
                     <ImageVerticalCard

@@ -1,9 +1,10 @@
 import { Card, Stack, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types"
-
+import { useTranslation } from "react-i18next";
 
 const BreedCharsCard = ({ breedChar, kind }) => {
+  const { t } = useTranslation(["breedCards"]);
   let charList = [];
   switch (kind) {
     case "cat":
@@ -50,7 +51,7 @@ const BreedCharsCard = ({ breedChar, kind }) => {
                     className=" text-capitalize"
                     style={{ fontSize: "15px" }}
                   >
-                    {title}
+                    {t(`${title}`)}
                   </span>
                   <div
                     className="rounded-pill bg-secondary border border-dark w-50 "
@@ -72,7 +73,7 @@ const BreedCharsCard = ({ breedChar, kind }) => {
             to={breedChar.name}
             className="btn btn-dark w-100"
           >
-            See Full Article
+            {t("to_page")}
           </Link>
         </Card.Body>
       </Card>

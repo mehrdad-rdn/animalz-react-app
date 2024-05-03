@@ -4,8 +4,10 @@ import { useRef } from "react";
 import PropTypes from "prop-types";
 import CheckboxAccordion from "./chekboxAccordion";
 import { catSizeMap, dogSizeMap, lifeSpanMap } from "../assets/data";
+import { useTranslation } from "react-i18next";
 
 const BreedFinderForm = ({ characteristics, setFilter, petKind }) => {
+  const { t } = useTranslation(["filterForm"]);
   //declare ref to access child component sates and manage them
   const checkBoxRef = useRef([]);
 
@@ -69,7 +71,7 @@ const BreedFinderForm = ({ characteristics, setFilter, petKind }) => {
           className="text-dark d-flex align-items-center"
           style={{ fontSize: 18 }}
         >
-          <BsFunnelFill /> FILTER BREEDS
+          <BsFunnelFill /> {t("filter_breeds")}
         </span>
         <Button
           type="reset"
@@ -77,7 +79,7 @@ const BreedFinderForm = ({ characteristics, setFilter, petKind }) => {
           onClick={clearHandler}
           className="link text-decoration-none fw-bold text-success p-0  ms-auto"
         >
-          Clear
+          {t("clear")}
         </Button>
       </Stack>
       <hr className=" text-warning border border-warning border-2 rounded m-0 mb-1" />
@@ -85,14 +87,14 @@ const BreedFinderForm = ({ characteristics, setFilter, petKind }) => {
         <CheckboxAccordion
           key={index}
           list={char.list}
-          header={char.header}
+          header={t(char.header)}
           ref={(element) => (checkBoxRef.current[index] = element)}
         />
       ))}
       <hr className=" text-warning border border-warning border-2 rounded m-0" />
       <Stack direction="horizontal" className="mt-1">
         <Button type="submit" size="sm" variant="dark">
-          Submit
+          {t("submit")}
         </Button>
         <Button
           type="reset"
@@ -100,7 +102,7 @@ const BreedFinderForm = ({ characteristics, setFilter, petKind }) => {
           onClick={clearHandler}
           className="link text-decoration-none fw-bold text-success p-0  ms-auto"
         >
-          Clear
+          {t("clear")}
         </Button>
       </Stack>
     </Form>

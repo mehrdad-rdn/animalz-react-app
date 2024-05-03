@@ -13,8 +13,11 @@ import BreedCharsCard from "../components/BreedCharsCard";
 import SearchBar from "../components/SearchBar";
 import useFetch from "../components/useFetch";
 import { useState, useCallback, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 const Breeds = () => {
+  //Extract the function t from the useTranslation hook. (destructuring assignment)
+  const { t } = useTranslation(["breeds"]);
   //extract petKind value from page URL
   const { petKind } = useParams();
   // assign breedData value from api
@@ -83,10 +86,10 @@ const Breeds = () => {
         <figure className="m-0">
           <img src={data.headerImg} alt="golden-retrevir" className="w-100" />
           <figcaption className="carousel-caption text-secondary bg-dark bg-opacity-50 rounded-sm">
-            <h5 className="text-capitalize display-6">{data.kind} breeds </h5>
-            <p className="lead">
-              Learn more about {data.kind} breeds and their Characteristics.
-            </p>
+            <h5 className="text-capitalize display-6">
+              {t(`${data.kind}_breeds`)}
+            </h5>
+            <p className="lead">{t(`${data.kind}_char_text`)}</p>
             <Stack
               direction="horizontal"
               gap={2}
@@ -97,11 +100,11 @@ const Breeds = () => {
                 className="btn btn-sm btn-warning text-nowrap"
               >
                 <BsFunnel className="me-1" />
-                Filter Breeds
+                {t("filtering")}
               </a>
               <Link to="/blog" className="btn btn-sm btn-warning text-nowrap">
                 <BsCardText className="me-1" />
-                Read Articles
+                {t("blog")}
               </Link>
             </Stack>
           </figcaption>
@@ -118,12 +121,10 @@ const Breeds = () => {
                       id="searchBoxDescription"
                       className="text-dark flex-fill m-0 me-auto"
                     >
-                      FIND BY BREED NAME
+                      {t("find_name")}
                     </p>
                     <SearchBar
-                      placeHolder={`${
-                        data.kind.charAt(0).toUpperCase() + data.kind.slice(1)
-                      } Breed`}
+                      placeHolder={t(`${data.kind}_placeholder`)}
                       theme="dark"
                       callback={(results) => setSearchResults(results)}
                       petKind={petKind}
@@ -146,16 +147,16 @@ const Breeds = () => {
                   <Card.Header className="p-0">
                     <ImageVerticalCard
                       imgUrl={data.breedImg}
-                      title={`What's a ${data.kind} breed?`}
-                      abstract={data.breedAbstract}
-                      btnText="SEE MORE ..."
+                      title={t(`${data.kind}_definition`)}
+                      abstract={t(`${data.kind}_Abstract`)}
+                      btnText={t("see_more")}
                       eventKey="0"
                     />
                   </Card.Header>
                   <Accordion.Collapse eventKey="0">
                     <Card.Body>
-                      <p className="my-0 ">{data.breedArticle}</p>
-                      <CustomToggle eventKey="0">LESS</CustomToggle>
+                      <p className="my-0 ">{t(`${data.kind}_Article`)}</p>
+                      <CustomToggle eventKey="0">{t("less")}</CustomToggle>
                     </Card.Body>
                   </Accordion.Collapse>
                 </Card>
