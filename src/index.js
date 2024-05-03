@@ -9,8 +9,9 @@ import Home from "./pages/HomePage";
 import Blog from "./pages/Blog";
 // import "bootstrap/dist/css/bootstrap.min.css";
 // import "./index.css";
-// import "../src/styles/main.min.css"
-// import "../node_modules/bootstrap/dist/js/bootstrap"
+import "../src/styles/main.min.css"
+// import "../node_modules/bootstrap/dist/js/bootstrap";
+// import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import Breeds from "./pages/Breeds";
 import BreedDetails from "./pages/BreedDetails";
 import NotFoundErr from "./pages/NotFoundErr";

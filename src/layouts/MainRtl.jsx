@@ -17,10 +17,10 @@ const MainRtl = ({ children }) => {
     rtlCssLink.href =
       "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css";
 
-    document.head.appendChild(rtlCssLink);
+    // document.head.appendChild(rtlCssLink);
 
     return () => {
-      document.head.removeChild(rtlCssLink);
+      // document.head.removeChild(rtlCssLink);
     };
   }, []);
   return (
