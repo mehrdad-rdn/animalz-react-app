@@ -1,0 +1,292 @@
+//Custom Variables
+
+$dark : #004225;
+$light : #f5f5dc;
+$secondary : #ffcf9d;
+$warning : #ee9322;
+
+$position-values: (
+  0: 0,
+  5: 5%,
+  50: 50%,
+  100: 100%,
+  auto: auto,
+);
+
+//Import bootstrap
+@import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+
+//clearify classes that must add in biDirectional styles from general styles
+.ms-auto{ margin-left: 0 !important}
+.me-auto{ margin-right: 0 !important}
+.ps-auto{ padding-left: 0 !important}
+.pe-auto{ padding-right: 0 !important}
+
+// @each $key , $val in $position-values {
+  //   .start-#{$key}{ left: auto ;}
+  //   .end-#{$key}{ right: auto ;}
+  // }
+
+  
+  .input-group{
+    input.form-control{
+      border-radius: $btn-border-radius;
+    }
+    #search-bar{
+      border-radius: $btn-border-radius;
+    }
+  }
+  
+  //add custom classes
+[dir="rtl"]{
+    .ms-auto{ margin-right: auto }
+    .me-auto{ margin-left: auto }
+    .ps-auto{padding-right: auto }
+    .pe-auto{padding-left: auto }
+    // .rounded-start{}
+    // .rounded-end{}
+    .page-item{
+        &:first-child .page-link {
+            border-top-right-radius: var(--bs-pagination-border-radius);
+            border-bottom-right-radius: var(--bs-pagination-border-radius);
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        &:last-child .page-link {
+            border-top-left-radius: var(--bs-pagination-border-radius);
+            border-bottom-left-radius: var(--bs-pagination-border-radius);
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+    .accordion-button::after{
+        margin-right: auto;
+    }
+
+    @each $key , $val in $position-values {
+      .start-#{$key}{ left: $val;}
+      .end-#{$key}{ right: $val;}
+    }
+
+    input.form-control{
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    #search-bar{
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+}
+[dir="ltr"]{
+    .ms-auto{ margin-left: auto !important}
+    .me-auto{ margin-right: auto !important}
+    .ps-auto{padding-left: auto !important}
+    .pe-auto{padding-right: auto !important}
+    // .rounded-start{}
+    // .rounded-end{}
+    .page-item{
+        &:first-child .page-link {
+            border-top-left-radius: var(--bs-pagination-border-radius);
+            border-bottom-left-radius: var(--bs-pagination-border-radius);
+        }
+        &:last-child .page-link {
+        border-top-right-radius: var(--bs-pagination-border-radius);
+        border-bottom-right-radius: var(--bs-pagination-border-radius);
+        }
+    }
+    .accordion-button::after{margin-left: auto !important;}
+
+    @each $key , $val in $position-values {
+    .start-#{$key}{ right: $val !important;}
+    .end-#{$key}{ left: $val !important;}
+    }
+
+    .input-group{
+      input.form-control{
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      #search-bar{
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+
+    }
+}
+
+.btn-warning {
+  background-color: #ee9322 !important;
+  border-color: #ee9322 !important;
+  color: #004225;
+  &:hover {
+    background-color: #ffb26b !important;
+    color: #198754;
+  }
+}
+
+
+.btn-dark {
+  background-color: #004225 !important;
+  border-color: #004225 !important;
+  color: #ffcf9d !important;
+  &:hover {
+    background-color: #198754 !important;
+    border-color: #219c90 !important;
+  }
+}
+
+
+.btn-secondary {
+  background-color: #ffcf9d !important;
+  border-color: #ffcf9d !important;
+  color: #198754;
+  &:hover {
+    background-color: #ffb000 !important;
+  }
+}
+
+/* <MyPagination /> styles */
+
+
+.active > .page-link,
+.page-link.active {
+      z-index: 3;
+      color: $secondary;
+    //   color: var(--bs-secondary);
+      background-color: $dark;
+    //   background-color: $dark;
+      border: 1px solid $secondary;
+    }
+    
+    .page-link {
+        color: $success;
+        background-color: $light;
+        
+        // &.active {
+        //   z-index: 3;
+        //   color: var(--bs-secondary);
+        //   background-color: $dark;
+        // }
+}
+
+
+/* <BreedFinderForm /> styles */
+.accordion-button {
+  padding: 5px;
+  font-size: 15px;
+  background-color: $light;
+ 
+  &::after{
+    margin-left: 0 !important;
+  }
+
+  &:focus {
+    border-color: $success;
+    box-shadow: none;
+  }
+  
+  &.collapsed {
+    box-shadow: none;
+  }
+  
+  &:not(.collapsed) {
+    background-color: rgba(25, 135, 84, 0.3);
+  }
+}
+
+.form-check-input {
+  /* background-color: rgba(25,135,84, 0.3); */
+  background-color: rgba(238, 147, 34, 0.3);
+  border: 1px solid $dark;
+  flex-shrink: 0;
+  width: 1.5em;
+  height: 1.5em;
+  /* margin-top: .25em; */
+  margin: 1px 3px 0 0;
+  
+  &:checked {
+    background-color: $dark;
+    border-color: $success;
+  }
+}
+
+.form-check-input {
+  /* background-color: rgba(25,135,84, 0.3); */
+  background-color: rgba(238, 147, 34, 0.3);
+  border: 1px solid $dark;
+  flex-shrink: 0;
+  width: 1.5em;
+  height: 1.5em;
+  /* margin-top: .25em; */
+  margin: 1px 3px 0 0;
+  
+  &:checked {
+    background-color: $dark;
+    border-color: $success;
+  }
+}
+
+
+
+
+/* <Tabs /> Styling */
+
+.nav.nav-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  border: none;
+  overflow: scroll;
+  position: relative;
+  z-index: 10;
+  
+  &::before {
+    background-color: $secondary;
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    min-width: 800px;
+    bottom: 0;
+    left: 0;
+    right: -100px;
+    z-index: -1;
+  }
+}
+
+.nav-tabs button.nav-link {
+  border-color: $success;
+  border-width: 2px;
+  border-style: solid solid none;
+  background-color:$dark;
+  margin: 0 0.15rem;
+  white-space: nowrap;
+  color: $success;
+
+  &.active{
+    border-style: outset;
+    border-color: $secondary $secondary transparent;
+    color: $secondary;
+    background-color: $dark;
+    margin-bottom: -1px;
+  }
+  &:hover{
+    border-color: $secondary $secondary transparent;
+    background-color: $dark;
+  }
+  
+}
+
+@media screen and (max-width: 575px) {
+  .carousel-caption {
+    position: static;
+    --bs-bg-opacity: 100%;
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 0.75rem);
+    padding-left: var(--bs-gutter-x, 0.75rem);
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

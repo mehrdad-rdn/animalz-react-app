@@ -34467,8 +34467,6 @@ const charTabsData = [
         minTitle: "Independent",
         maxTitle: "Lovey-Dovey",
         scoreFrom: "family_friendly",
-        description:
-          "Cats are known for their affectionate nature towards their human family members. Many cats enjoy cuddling, seeking attention, and forming strong bonds with their owners. They often show their love through purring, rubbing against their family members, and seeking physical closeness, making them cherished companions in many households.",
       },
       {
         petKind: "cat",
@@ -34476,8 +34474,6 @@ const charTabsData = [
         minTitle: "Not Recommended",
         maxTitle: "Good With Children",
         scoreFrom: "children_friendly",
-        description:
-          "Cats can be great companions for children, with many breeds known for their gentle and playful nature. When properly socialized, cats can form strong bonds with kids, providing them with affection and entertainment. However, it's important to supervise interactions and teach children how to handle cats gently to ensure a safe and harmonious relationship.",
       },
       {
         petKind: "dog",
@@ -34485,8 +34481,6 @@ const charTabsData = [
         minTitle: "Not Recommended",
         maxTitle: "Good With Children",
         scoreFrom: "good_with_children",
-        description:
-          "A breed's level of tolerance and patience with childrens' behavior, and overall family-friendly nature. Dogs should always be supervised around young children, or children of any age who have little exposure to dogs.",
       },
       {
         petKind: "dog",
@@ -34494,8 +34488,6 @@ const charTabsData = [
         minTitle: "Not Recommended",
         maxTitle: "Good With Other Dogs",
         scoreFrom: "good_with_other_dogs",
-        description:
-          "How generally friendly a breed is towards other dogs. Dogs should always be supervised for interactions and introductions with other dogs, but some breeds are innately more likely to get along with other dogs, both at home and in public.",
       },
       {
         petKind: "cat",
@@ -34503,8 +34495,6 @@ const charTabsData = [
         minTitle: "Not Recommended",
         maxTitle: "Good With Other Dogs",
         scoreFrom: "other_pets_friendly",
-        description:
-          "Cats can display varying levels of friendliness towards other pets. Some cats may be sociable and enjoy the company of other animals, while others may be more reserved or even territorial. Proper introductions and gradual acclimation can help cats form positive relationships with other pets, creating a harmonious multi-pet household.",
       },
     ],
   },
@@ -34517,8 +34507,6 @@ const charTabsData = [
         minTitle: "No Shedding",
         maxTitle: "Hair Everywhere",
         scoreFrom: "shedding",
-        description:
-          "How much fur and hair you can expect the breed to leave behind. Breeds with high shedding will need to be brushed more frequently, are more likely to trigger certain types of allergies, and are more likely to require more consistent vacuuming and lint-rolling.",
       },
       {
         petKind: "cat",
@@ -34526,8 +34514,6 @@ const charTabsData = [
         minTitle: "No Shedding",
         maxTitle: "Hair Everywhere",
         scoreFrom: "shedding",
-        description:
-          "Cats can vary in their shedding level, with some breeds shedding more than others. Breeds with high shedding will require more frequent brushing and may trigger certain allergies. Consistent vacuuming and lint-rolling may also be necessary to manage shedding. However, regular grooming can help reduce shedding and keep cats' coats healthy and shiny.",
       },
       {
         petKind: "dog",
@@ -34535,8 +34521,6 @@ const charTabsData = [
         minTitle: "Monthly",
         maxTitle: "Daily",
         scoreFrom: "grooming",
-        description:
-          "How frequently a breed requires bathing, brushing, trimming, or other kinds of coat maintenance. Consider how much time, patience, and budget you have for this type of care when looking at the grooming effort needed. All breeds require regular nail trimming.",
       },
       {
         petKind: "cat",
@@ -34544,8 +34528,6 @@ const charTabsData = [
         minTitle: "Monthly",
         maxTitle: "Daily",
         scoreFrom: "grooming",
-        description:
-          "Cats' grooming needs vary depending on their breed and coat type. Long-haired breeds often require more frequent brushing to prevent matting, while short-haired cats may need less frequent grooming. Regular nail trimming is essential for all cats. When choosing a cat, consider the grooming effort needed and ensure it aligns with your time, patience, and budget for grooming care.",
       },
       {
         petKind: "dog",
@@ -34553,8 +34535,6 @@ const charTabsData = [
         minTitle: "Less Likely to Drool",
         maxTitle: "Always Have a Towel",
         scoreFrom: "drooling",
-        description:
-          "How drool-prone a breed tends to be. If you're a neat freak, dogs that can leave ropes of slobber on your arm or big wet spots on your clothes may not be the right choice for you.",
       },
       {
         petKind: "dog",
@@ -34562,8 +34542,6 @@ const charTabsData = [
         minTitle: "Short",
         maxTitle: "Long",
         scoreFrom: "coat_length",
-        description:
-          "How long the breed's coat is expected to be. Some long-haired breeds can be trimmed short, but this will require additional upkeep to maintain.",
       },
       {
         petKind: "cat",
@@ -34571,8 +34549,6 @@ const charTabsData = [
         minTitle: "Optimal Health Management ",
         maxTitle: "Fundamental Health Awareness ",
         scoreFrom: "general_health",
-        description:
-          "Cats come in various breeds, each with its specific health considerations. Some breeds are prone to genetic conditions, while others may have specific dietary or grooming needs. Understanding the general health concerns of different breeds can help ensure their overall well-being.",
       },
     ],
   },
@@ -34585,8 +34561,6 @@ const charTabsData = [
         minTitle: "Reserved ",
         maxTitle: "Everyone Is My Best Friend",
         scoreFrom: "good_with_strangers",
-        description:
-          "How welcoming a breed is likely to be towards strangers. Some breeds will be reserved or cautious around all strangers, regardless of the location, while other breeds will be happy to meet a new human whenever one is around!",
       },
       {
         petKind: "cat",
@@ -34594,8 +34568,6 @@ const charTabsData = [
         minTitle: "Reserved ",
         maxTitle: "Everyone Is My Best Friend",
         scoreFrom: "stranger_friendly",
-        description:
-          "Cats, like dogs, vary in their sociability with other animals. Some cats enjoy the company of other felines, while others prefer to be the only pet. Understanding a cat's sociability level is crucial when introducing them to other animals, ensuring a harmonious living environment for all pets involved.",
       },
       {
         petKind: "dog",
@@ -34603,8 +34575,6 @@ const charTabsData = [
         minTitle: "Only When You Want To Play",
         maxTitle: "Non-Stop",
         scoreFrom: "playfulness",
-        description:
-          "How enthusiastic about play a breed is likely to be, even past the age of puppyhood. Some breeds will continue wanting to play tug-of-war or fetch well into their adult years, while others will be happy to just relax on the couch with you most of the time.",
       },
       {
         petKind: "cat",
@@ -34612,8 +34582,6 @@ const charTabsData = [
         minTitle: "Only When You Want To Play",
         maxTitle: "Non-Stop",
         scoreFrom: "playfulness",
-        description:
-          "Cats' playfulness can vary by breed and individual personality. Some breeds, such as the Abyssinian and Siamese, are known for their high energy and playful nature, often enjoying interactive games well into adulthood. Other breeds, like the Persian, may be more laid-back and prefer lounging and relaxing. When considering a cat, it's important to consider their playfulness and ensure it aligns with your lifestyle and preferences.",
       },
       {
         petKind: "dog",
@@ -34621,8 +34589,6 @@ const charTabsData = [
         minTitle: "What's Mine Is Yours",
         maxTitle: "Vigilant",
         scoreFrom: "protectiveness",
-        description:
-          "A breed's tendency to alert you that strangers are around. These breeds are more likely to react to any potential threat, whether it's the mailman or a squirrel outside the window. These breeds are likely to warm to strangers who enter the house and are accepted by their family.",
       },
     ],
   },
@@ -34635,8 +34601,6 @@ const charTabsData = [
         minTitle: "Self-Willed",
         maxTitle: "Eager to Please",
         scoreFrom: "trainability",
-        description:
-          "How easy it will be to train your dog, and how willing your dog will be to learn new things. Some breeds just want to make their owner proud, while others prefer to do what they want, when they want to, wherever they want!",
       },
       {
         petKind: "dog",
@@ -34644,8 +34608,6 @@ const charTabsData = [
         minTitle: "Couch Potato",
         maxTitle: "High Energy",
         scoreFrom: "energy",
-        description:
-          "The amount of exercise and mental stimulation a breed needs. High energy breeds are ready to go and eager for their next adventure. They'll spend their time running, jumping, and playing throughout the day. Low energy breeds are like couch potatoes - they're happy to simply lay around and snooze.",
       },
       {
         petKind: "cat",
@@ -34653,8 +34615,6 @@ const charTabsData = [
         minTitle: "Basic Cognition",
         maxTitle: "Advanced Intellect",
         scoreFrom: "intelligence",
-        description:
-          "Cats are known for their intelligence, problem-solving abilities, and adaptability. They can learn to open doors, manipulate puzzle toys, and even respond to their names. Some breeds, such as the Siamese and the Maine Coon, are particularly known for their high intelligence and ability to learn tricks. Cats also have excellent memory and can quickly learn and adapt to new environments and routines.",
       },
       {
         petKind: "dog",
@@ -34662,8 +34622,6 @@ const charTabsData = [
         minTitle: "Only To Alert",
         maxTitle: "Very Vocal",
         scoreFrom: "barking",
-        description:
-          "How often this breed vocalizes, whether it's with barks or howls. While some breeds will bark at every passer-by or bird in the window, others will only bark in particular situations. Some barkless breeds can still be vocal, using other sounds to express themselves.",
       },
       {
         petKind: "cat",
@@ -34671,8 +34629,6 @@ const charTabsData = [
         minTitle: "Silent",
         maxTitle: "Very Vocal",
         scoreFrom: "meowing",
-        description:
-          "Cats communicate through meowing, and some cats meow more than others. Some cats meow frequently throughout the day, while others only meow when they want something. Different meows can express different needs or emotions. Breed and personality can affect how often a cat meows.",
       },
     ],
   },

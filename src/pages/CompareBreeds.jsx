@@ -4,8 +4,11 @@ import { Container, Stack } from "react-bootstrap";
 import { compareContext } from "../components/Contexes";
 import CompareColumn from "../components/CompareColumn";
 import MainLayout from "../layouts/MainLayout";
+import { useTranslation } from "react-i18next";
 
 const CompaireBreeds = () => {
+  //define t function using useTranslation hook
+  const { t } = useTranslation(["comparePage"]);
   // Assign the value of "petkind" using URL.
   const { petKind } = useParams();
 
@@ -17,15 +20,9 @@ const CompaireBreeds = () => {
       <MainLayout>
         <header className="bg-dark">
           <Container fluid="lg" className="text-center py-5">
-            <h1 className="text-warning">Compare Breeds</h1>
-            <p className="lead text-secondary">
-              Can’t decide which breed of dog is right for you? Compare dog
-              breeds below to see how different breed characteristics and
-              attributes stack up against each other.
-            </p>
-            <h5 className="text-secondary">
-              Select up to 5 breeds to see a side-by-side comparison
-            </h5>
+            <h1 className="text-warning">{t("Page_title")}</h1>
+            <p className="lead text-secondary">{t("title_desc")}</p>
+            <h5 className="text-secondary">{t("Header_instruction")}</h5>
           </Container>
         </header>
         <main className="bg-light">

@@ -8,7 +8,11 @@ import { charTabsData, petData } from "../assets/data";
 import { DogImgPlaceholder } from "../assets/BreedDetailsSVG";
 import useFetch from "./useFetch";
 import PropTypes from "prop-types"
+import { useTranslation } from "react-i18next";
 const CompareColumn = ({ petKind, colIndex }) => {
+  //define t function using useTranslation hook
+  const { t } = useTranslation(["breedTraits", "filterForm"]);
+
   //Defining a relative data array based on the pet type value.
 
   const { data, setSearchParams } = useFetch(petKind, { name: " " });
@@ -121,7 +125,6 @@ const CompareColumn = ({ petKind, colIndex }) => {
         btnVariant="dark"
         placeholder="Breed Name"
         callback={(searchTerm) => setSearchParams({ name: searchTerm })}
-        // callback={(searchTerm) => findItem(searchTerm)}
         petKind={petKind}
       />
       {breedChar && (
@@ -137,7 +140,7 @@ const CompareColumn = ({ petKind, colIndex }) => {
           {charTabsData.map(({ tabName, tabChars }, index) => (
             <div key={index}>
               <h6 className="w-100 text-center text-dark bg-dark bg-opacity-25 mb-0 py-1">
-                {tabName}
+                {t(`${tabName}`)}
               </h6>
               <Stack
                 direction="vertical"
@@ -151,7 +154,7 @@ const CompareColumn = ({ petKind, colIndex }) => {
                         className="w-100 text-center text-dark mb-0 px-1"
                         style={{ fontSize: "0.8rem" }}
                       >
-                        {title}
+                        {t(`${title}`)}
                       </p>
 
                       {labelFinder(scoreFrom) ? (
@@ -161,7 +164,7 @@ const CompareColumn = ({ petKind, colIndex }) => {
                             textAlign: "center",
                           }}
                         >
-                          {labelFinder(scoreFrom)}
+                          {t(`${labelFinder(scoreFrom)}`, { ns: "filterForm" })}
                         </p>
                       ) : (
                         <div className="hstack w-100 p-1">

@@ -57,7 +57,7 @@ const CheckboxAccordion = forwardRef(function CheckboxAccordion(
               style={{
                 fontSize: "10px",
                 margin: " 0 3px",
-                display: "flex",
+                display: "inline-block",
               }}
             />
           ))}

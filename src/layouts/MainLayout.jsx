@@ -1,31 +1,34 @@
-import { lazy, Suspense } from "react";
 import ThemeProvider from "react-bootstrap/ThemeProvider";
-// import "../index.css";
-
-const MainLtr = lazy(() => import("./MainLtr"));
-const MainRtl = lazy(() => import("./MainRtl"));
+import MainComponent from "../components/MainComponent";
 
 function MainLayout({ children }) {
-  return (
-    <Suspense fallback={<Loading />}>
-      {localStorage.getItem("i18nextLng") === "fa" ? (
-        <ThemeProvider dir="rtl">
-          <MainRtl>{children}</MainRtl>
-        </ThemeProvider>
-      ) : (
-        <ThemeProvider dir="ltr">
-          <MainLtr>{children}</MainLtr>
-        </ThemeProvider>
-      )}
-    </Suspense>
+  return localStorage.getItem("i18nextLng") === "fa" ? (
+    <ThemeProvider dir="rtl">
+      <MainComponent megaMenuItems={megaMenuItems.rtl} direction="rtl">
+        {children}
+      </MainComponent>
+    </ThemeProvider>
+  ) : (
+    <ThemeProvider dir="ltr">
+      <MainComponent megaMenuItems={megaMenuItems.ltr} direction="rtl">
+        {children}
+      </MainComponent>
+    </ThemeProvider>
   );
 }
 export default MainLayout;
 
-function Loading() {
-  <div className="bg-dark text-secondary">
-    <div className="container-lg">
-      <h1>Loading...</h1>
-    </div>
-  </div>;
-}
+const megaMenuItems = {
+  rtl: {
+    حیوانات: ["لیست الفبایی", "مقایسه", "جستجو", "اطلاعات تصادفی"],
+    سگ: ["لیست الفبایی", "مقایسه", "جستجو", "اطلاعات تصادفی"],
+    گربه: ["لیست الفبایی", "مقایسه", "جستجو", "اطلاعات تصادفی"],
+    پرنده: ["لیست الفبایی", "مقایسه", "جستجو", "اطلاعات تصادفی"],
+  },
+  ltr: {
+    animals: ["a-z list", "categories", "search", "random Facts"],
+    dogs: ["a-z list", "Suitable Dog", "search", "random Facts"],
+    cats: ["a-z list", "Suitable Cat", "search", "random Facts"],
+    birds: ["a-z list", "Suitable Bird", "search", "random Facts"],
+  },
+};

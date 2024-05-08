@@ -62,15 +62,7 @@ const NavigationBar = ({ brand, imgUrl }) => {
                       i18n.resolvedLanguage === lng ? "fw-bold" : "text-muted"
                     }`}
                     type="submit"
-                    onClick={() => {
-                      i18n.changeLanguage(lng);
-                      document.documentElement.setAttribute("lang", lng);
-                      if (lng === "fa") {
-                        document.documentElement.setAttribute("dir", "rtl");
-                      } else {
-                        document.documentElement.setAttribute("dir", "ltr");
-                      }
-                    }}
+                    onClick={() => i18n.changeLanguage(lng)}
                   >
                     {t(`langBtn.langName.${lng}`)}
                   </button>

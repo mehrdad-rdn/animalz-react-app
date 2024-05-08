@@ -95,7 +95,6 @@ function Home() {
                 <SectionsCard
                   title={data.title}
                   description={t(`${data.name}_desc`)}
-                  // description={data.description}
                   linkTo={data.linkTo}
                 />
               </Col>
@@ -121,14 +120,13 @@ function Home() {
             direction="vertical"
             className="align-items-center flex-md-row"
           >
-            <p className="lead text-secondary mt-3 me-3">
-              Explore our blog and see More Animal News, Facts, Rankings ,...
-            </p>
+            <p className="lead text-secondary mt-3 me-3">{t("explore_blog")}</p>
             <Link
               to="/blog"
               className="btn btn-warning ms-auto py-0 text-nowrap "
             >
-              Explore Blog <BsChevronDoubleRight className="h5 mt-2 p-0" />
+              {t("explore_blog_btn")}{" "}
+              <BsChevronDoubleRight className="h5 mt-2 p-0" />
             </Link>
           </Stack>
         </Container>
