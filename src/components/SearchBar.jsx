@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import PropTypes from "prop-types";
 import "../styles/searchBarStyle.css";
-import useFetch from "./useFetch";
+import useFetch from "../custom-hooks/useFetch";
 
 const SearchBar = forwardRef(
   ({ placeholder, callback, btnVariant, theme, petKind }, ref) => {

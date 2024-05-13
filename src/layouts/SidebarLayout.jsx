@@ -6,8 +6,8 @@ const SidebarLayout = ({ children, bg }) => {
     <aside
       as="aside"
       id="sidebar"
-      className="order-last order-md-first start position-sticky top-0 overflow-scroll rounded"
-      style={{ height: "100dvh", backgroundColor: bg }}
+      className={` bg-${bg} order-last order-md-first start position-sticky top-0 overflow-scroll rounded `}
+      style={{ height: "100dvh" }}
     >
       <Stack
         direction="horizontal"
@@ -25,7 +25,7 @@ SidebarLayout.propTypes = {
 };
 
 SidebarLayout.defaultProps = {
-  bg: "transparent",
+  bg: "light",
 };
 
 export default SidebarLayout;

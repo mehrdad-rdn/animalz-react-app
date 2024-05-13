@@ -11,7 +11,7 @@ import ImageVerticalCard from "../components/imageVerticalCard";
 import CustomToggle from "../components/CustomToggle";
 import BreedCharsCard from "../components/BreedCharsCard";
 import SearchBar from "../components/SearchBar";
-import useFetch from "../components/useFetch";
+import useFetch from "../custom-hooks/useFetch";
 import { useState, useCallback, useRef } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -114,7 +114,7 @@ const Breeds = () => {
         <Container fluid="lg">
           <Row xs={1} sm={2} className="py-3">
             <Col xs={12} sm={6} md={4}>
-              <SidebarLayout bg={`var(--bs-light)`}>
+              <SidebarLayout bg="light">
                 <Stack direction="vertical" gap={3} className="m-2">
                   <section id="search-box">
                     <p

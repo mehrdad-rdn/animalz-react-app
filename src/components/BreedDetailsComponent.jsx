@@ -12,7 +12,7 @@ import {
 import NotFoundErr from "../pages/NotFoundErr";
 import ImageVerticalCard from "../components/imageVerticalCard";
 import BreedTraits from "../components/BreedTraits";
-import useFetch from "../components/useFetch";
+import useFetch from "../custom-hooks/useFetch";
 import { useTranslation } from "react-i18next";
 
 const BreedDetailsComponent = ({ breedName, petKind }) => {

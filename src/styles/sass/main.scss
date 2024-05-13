@@ -4,6 +4,15 @@ $dark : #004225;
 $light : #f5f5dc;
 $secondary : #ffcf9d;
 $warning : #ee9322;
+$scrollBg : $light;
+
+//customize accordion default parameters
+$accordion-bg:  transparent;
+$accordion-button-bg: $dark;
+$accordion-button-color: $secondary;
+$accordion-icon-color: $secondary;
+$accordion-button-active-bg: tint-color($dark, 30%);
+$accordion-button-active-color: $dark;
 
 $position-values: (
   0: 0,
@@ -15,7 +24,8 @@ $position-values: (
 
 //Import bootstrap
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
-
+//custom mixin for scrollbar
+@import "./scrollbar";
 
 //clearify classes that must add in biDirectional styles from general styles
 .ms-auto{ margin-left: 0 !important}
@@ -23,20 +33,15 @@ $position-values: (
 .ps-auto{ padding-left: 0 !important}
 .pe-auto{ padding-right: 0 !important}
 
-// @each $key , $val in $position-values {
-  //   .start-#{$key}{ left: auto ;}
-  //   .end-#{$key}{ right: auto ;}
-  // }
-
   
-  .input-group{
-    input.form-control{
-      border-radius: $btn-border-radius;
-    }
-    #search-bar{
-      border-radius: $btn-border-radius;
-    }
+.input-group{
+  input.form-control{
+    border-radius: $btn-border-radius;
   }
+  #search-bar{
+    border-radius: $btn-border-radius;
+  }
+}
   
   //add custom classes
 [dir="rtl"]{
@@ -117,6 +122,38 @@ $position-values: (
     }
 }
 
+@include scrollbar($dark, $scrollBg);
+
+.dark-mode{
+  @include scrollbar($dark, darken($light, 50%));
+  .text-success{color: darken($success, 15%) !important;}
+  
+  .bg-light{background-color: darken($light, 50%) !important;}
+  .btn-light{
+    background-color: darken($light, 50%) !important;
+    border-color: transparent !important;
+    
+  }
+  .dropdown-menu{
+    background-color: darken($light, 50%) !important;
+    .dropdown-item:hover{
+      background-color: darken($light, 60%) !important;
+      margin: 0.5rem;
+      border-radius: 0.5rem;
+    }
+  }
+  .card{
+    background-color: transparent;
+    .card-body{
+      background-color: darken($light, 60%) !important;
+      }
+  }
+
+
+}
+
+
+
 .btn-warning {
   background-color: #ee9322 !important;
   border-color: #ee9322 !important;
@@ -155,9 +192,7 @@ $position-values: (
 .page-link.active {
       z-index: 3;
       color: $secondary;
-    //   color: var(--bs-secondary);
       background-color: $dark;
-    //   background-color: $dark;
       border: 1px solid $secondary;
     }
     
@@ -174,10 +209,10 @@ $position-values: (
 
 
 /* <BreedFinderForm /> styles */
+
 .accordion-button {
   padding: 5px;
   font-size: 15px;
-  background-color: $light;
  
   &::after{
     margin-left: 0 !important;
@@ -198,13 +233,11 @@ $position-values: (
 }
 
 .form-check-input {
-  /* background-color: rgba(25,135,84, 0.3); */
   background-color: rgba(238, 147, 34, 0.3);
   border: 1px solid $dark;
   flex-shrink: 0;
   width: 1.5em;
   height: 1.5em;
-  /* margin-top: .25em; */
   margin: 1px 3px 0 0;
   
   &:checked {
@@ -214,13 +247,11 @@ $position-values: (
 }
 
 .form-check-input {
-  /* background-color: rgba(25,135,84, 0.3); */
   background-color: rgba(238, 147, 34, 0.3);
   border: 1px solid $dark;
   flex-shrink: 0;
   width: 1.5em;
   height: 1.5em;
-  /* margin-top: .25em; */
   margin: 1px 3px 0 0;
   
   &:checked {
@@ -290,3 +321,4 @@ $position-values: (
     margin-left: auto;
   }
 }
+

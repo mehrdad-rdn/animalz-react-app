@@ -6,9 +6,11 @@ import SearchBar from "./SearchBar";
 import { compareContext } from "../components/Contexes";
 import { charTabsData, petData } from "../assets/data";
 import { DogImgPlaceholder } from "../assets/BreedDetailsSVG";
-import useFetch from "./useFetch";
-import PropTypes from "prop-types"
+import useFetch from "../custom-hooks/useFetch";
+import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
+
+
 const CompareColumn = ({ petKind, colIndex }) => {
   //define t function using useTranslation hook
   const { t } = useTranslation(["breedTraits", "filterForm"]);
